@@ -9,7 +9,11 @@ import 'package:unident_app/horizontal_week_calendar.dart';
 import 'package:unident_app/login.dart';
 import 'package:unident_app/my_account.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:unident_app/glisare_imagini_screen_IGV_only.dart';
+import 'package:unident_app/clinics_glisare_imagini_screen.dart';
 //import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
+
+//import 'package:unident_app/clinics_list_screen.dart';
 
 Map<String, Duration> orarProgramari = {
   '8:00 AM': const Duration(hours: 8),
@@ -32,11 +36,12 @@ Future<void> main() async {
 
   var loggedIn = prefs.getBool('loggedIn');
   runApp(
-    MaterialApp(
+    const MaterialApp(
       // localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
-      localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
-      supportedLocales: const [Locale('en'), Locale('ro')],
-      home: loggedIn == true ? const MyApp() : const LoginScreen(),
+      localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+      supportedLocales: [Locale('en'), Locale('ro')],
+      //home: loggedIn == true ? const MyApp() : const LoginScreen(), //Andrei Badescu
+      home: MyApp(),
       // theme: ThemeData(
       //   textTheme: GoogleFonts.openSansTextTheme(),
       // ), // use MaterialApp
@@ -53,7 +58,11 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: Home(),
+      //home: Home(),
+      //home: GlisareImaginiScreen(),
+      home: ClinicsGlisareImaginiScreen(),
+      //home: ClinicsScreen(),
+      
     );
   }
 }
