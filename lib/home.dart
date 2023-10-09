@@ -18,6 +18,7 @@ import 'package:unident_app/redirect_tarife.dart';
 import 'horizontal_week_calendar.dart';
 
 final _drawerController = ZoomDrawerController();
+// final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -33,9 +34,16 @@ class _HomeState extends State<Home> {
   int selectedIndex = -1;
   var currentIndexNavBar = 0;
 
+  void setPage(index) {
+    setState(() {
+      currentIndexDrawer = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // key: scaffoldKey,
       bottomNavigationBar: SalomonBottomBar(
         selectedItemColor: const Color.fromARGB(255, 13, 19, 130),
         currentIndex: currentIndexNavBar,
@@ -92,12 +100,6 @@ class _HomeState extends State<Home> {
         duration: const Duration(milliseconds: 700),
       ),
     );
-  }
-
-  void setPage(index) {
-    setState(() {
-      currentIndexDrawer = index;
-    });
   }
 
   Widget currentScreen() {

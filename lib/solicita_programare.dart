@@ -50,25 +50,28 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
           backgroundColor: Colors.purple[900],
           centerTitle: true),
       body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(height: 40),
-            HorizontalWeekCalendar(
-              weekStartFrom: WeekStartFrom.Monday,
-              activeBackgroundColor: const Color.fromARGB(255, 46, 4, 171),
-              activeTextColor: Colors.white,
-              inactiveBackgroundColor: Colors.white,
-              inactiveTextColor: Colors.black,
-              disabledTextColor: Colors.grey,
-              disabledBackgroundColor: Colors.white,
-              activeNavigatorColor: Colors.black,
-              inactiveNavigatorColor: Colors.grey,
-              monthColor: Colors.black,
-              onDateChange: (date) {
-                selectedDate = date;
-                print(selectedDate);
-              },
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: HorizontalWeekCalendar(
+                weekStartFrom: WeekStartFrom.Monday,
+                activeBackgroundColor: const Color.fromARGB(255, 46, 4, 171),
+                activeTextColor: Colors.white,
+                inactiveBackgroundColor: Colors.white,
+                inactiveTextColor: Colors.black,
+                disabledTextColor: Colors.grey,
+                disabledBackgroundColor: Colors.white,
+                activeNavigatorColor: Colors.black,
+                inactiveNavigatorColor: Colors.grey,
+                monthColor: Colors.black,
+                onDateChange: (date) {
+                  selectedDate = date;
+                  print(selectedDate);
+                },
+              ),
             ),
             const Divider(color: Colors.black12, thickness: 2),
             SizedBox(
@@ -149,14 +152,12 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
                     fillColor: Color.fromARGB(255, 227, 221, 221)),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                child: Text(
-                  'Nota: Echipa noastra va propune sa alegeti o zi si o ora pentru programare la o consultatie ca ulterior sa puteti prelua legatura cu o colega care sa va confirme daca alegerea dvs. este posibila sau sa va poata propune o data alternativa',
-                  maxLines: 5,
-                  style: TextStyle(color: Colors.black54),
-                ),
+            const Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Text(
+                'Nota: Echipa noastra va propune sa alegeti o zi si o ora pentru programare la o consultatie ca ulterior sa puteti prelua legatura cu o colega care sa va confirme daca alegerea dvs. este posibila sau sa va poata propune o data alternativa',
+                maxLines: 5,
+                style: TextStyle(color: Colors.black54),
               ),
             ),
             const SizedBox(height: 30),
@@ -199,6 +200,25 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
     if (controllerDetails.text.isEmpty) {
       Flushbar(
         message: "Adaugati cateva detalii!",
+        icon: Icon(
+          Icons.info_outline,
+          size: 28.0,
+          color: Colors.red[400],
+        ),
+        borderColor: Colors.red[400],
+        borderWidth: 2,
+        isDismissible: false,
+        margin: const EdgeInsets.all(6.0),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        borderRadius: BorderRadius.circular(12),
+        duration: const Duration(seconds: 3),
+        leftBarIndicatorColor: Colors.red[400],
+      ).show(context);
+      return null;
+    } else if (selectedDate.hour == 0) {
+      Flushbar(
+        message: "Selectati o ora!",
         icon: Icon(
           Icons.info_outline,
           size: 28.0,

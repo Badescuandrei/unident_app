@@ -66,7 +66,21 @@ class Medic {
   });
 }
 
+class Clinic {
+  final String imagePath;
+  final String clinicName;
+  final String location;
+  final String? nume;
+
+  Clinic({required this.imagePath, required this.clinicName, required this.location, this.nume});
+}
+
 class MedicSlotLiber {
+  final String idCabinet;
+  final String idSediu;
+  final String denumireSediu;
+  final String judet;
+  final String localitate;
   final List<String> profesii;
   final String id;
   final String nume;
@@ -79,7 +93,12 @@ class MedicSlotLiber {
   bool selected;
 
   MedicSlotLiber(
-      {required this.profesii,
+      {required this.idCabinet,
+      required this.idSediu,
+      required this.denumireSediu,
+      required this.judet,
+      required this.localitate,
+      required this.profesii,
       required this.id,
       required this.nume,
       required this.poza,

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:unident_app/home.dart';
 // import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:unident_app/horizontal_week_calendar.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
@@ -147,7 +148,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                       shrinkWrap: true,
                       itemCount: orarProgramari.length,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, childAspectRatio: 0.6 / 1.5),
+                          crossAxisCount: 2, childAspectRatio: 0.6 / 1.6),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -200,7 +201,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
@@ -222,24 +223,22 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                     fillColor: Color.fromARGB(255, 227, 221, 221)),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                child: Text(
-                  'Nota: Echipa noastra va propune sa alegeti o zi si o ora pentru programare la o consultatie ca ulterior sa puteti prelua legatura cu o colega care sa va confirme daca alegerea dvs. este posibila sau sa va poata propune o data alternativa',
-                  maxLines: 5,
-                  style: TextStyle(color: Colors.black54, fontSize: 12),
-                ),
+            const Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Text(
+                'Nota: Echipa noastra va propune sa alegeti o zi si o ora pentru programare la o consultatie ca ulterior sa puteti prelua legatura cu o colega care sa va confirme daca alegerea dvs. este posibila sau sa va poata propune o data alternativa',
+                maxLines: 5,
+                style: TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.w900),
               ),
             ),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 sendAppointmentRequest().then((value) {
                   value == null
                       ? null
-                      : value == "13"
-                          ? Future.delayed(Duration(milliseconds: 10), () {})
+                      : value.contains('13')
+                          ? Future.delayed(const Duration(milliseconds: 10), () {})
                           : null;
                 });
               },
@@ -288,6 +287,25 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
         leftBarIndicatorColor: Colors.red[400],
       ).show(context);
       return null;
+    } else if (selectedDate.hour == 0) {
+      Flushbar(
+        message: "Selectati o ora!",
+        icon: Icon(
+          Icons.info_outline,
+          size: 28.0,
+          color: Colors.red[400],
+        ),
+        borderColor: Colors.red[400],
+        borderWidth: 2,
+        isDismissible: false,
+        margin: const EdgeInsets.all(6.0),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        borderRadius: BorderRadius.circular(12),
+        duration: const Duration(seconds: 3),
+        leftBarIndicatorColor: Colors.red[400],
+      ).show(context);
+      return null;
     }
     // } else if (controllerDatePicker.toString().isEmpty) {
     //   print("error 2");
@@ -313,6 +331,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
       print(res);
 
       if (res!.startsWith("13")) {
+        print('e bine');
         Flushbar(
           message: "Cerere trimisa cu succes!",
           icon: const Icon(
@@ -330,6 +349,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
           duration: const Duration(seconds: 3),
           leftBarIndicatorColor: Colors.green,
         ).show(context);
+
         return "13";
       }
       return "eroare";

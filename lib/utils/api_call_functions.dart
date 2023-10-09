@@ -180,17 +180,31 @@ class ApiCallFunctions {
           profesii = list[7].split(',');
           print(profesii);
         }
+        String denumireSediu = '';
+        String idCabinet = '';
+        String idSediu = '';
+        String judet = '';
+        String localitate = '';
 
         DateTime dataPrimulSlotLiber = new DateTime(1, 1, 1);
         print(list.length);
         if (list.length > 8) {
           dataPrimulSlotLiber = DateTime.utc(int.parse(list[8].substring(0, 4)), int.parse(list[8].substring(4, 6)),
               int.parse(list[8].substring(6, 8)));
-
+          denumireSediu = list[9];
+          idCabinet = list[10];
+          idSediu = list[11];
+          judet = list[12];
+          localitate = list[13];
           // print(data);
           // print(list[7]);
         }
         medici.add(MedicSlotLiber(
+            denumireSediu: denumireSediu,
+            idCabinet: idCabinet,
+            idSediu: idSediu,
+            judet: judet,
+            localitate: localitate,
             profesii: profesii,
             id: list[0],
             nume: list[1],
@@ -206,6 +220,25 @@ class ApiCallFunctions {
     }
 
     return medici;
+  }
+
+  Future<String?> uploadDocument({
+    required Uint8List pContinutDocument,
+    required String pAdresaEmail,
+    required String pParolaMD5,
+    required String pDenumire,
+    required String pExtensie,
+  }) async {
+    final Map<String, String> param = {
+      'pDenumire': pDenumire,
+      'pExtensie': pExtensie,
+      'pParolaMD5': pParolaMD5,
+      'pSirBitiDocument': pContinutDocument.toString(),
+      'pAdresaEmail': pAdresaEmail,
+    };
+    String? res = await apiCall.apeleazaMetodaString(pNumeMetoda: 'IncarcaDocumentPacient', pParametrii: param);
+
+    return res;
   }
 
   Future<String?> loginByPhone({

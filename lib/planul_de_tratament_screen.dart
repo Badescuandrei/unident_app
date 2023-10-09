@@ -1,8 +1,10 @@
-import 'package:appinio_animated_toggle_tab/appinio_animated_toggle_tab.dart';
+// import 'package:appinio_animated_toggle_tab/appinio_animated_toggle_tab.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unident_app/apinio.dart';
 import 'package:unident_app/utils/api_call.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
 import 'package:unident_app/utils/classes.dart';
@@ -347,8 +349,8 @@ class detaliiProgramareWidget extends StatelessWidget {
                     style: TextStyle(color: Colors.black45),
                   ),
                   const SizedBox(height: 5),
-                  Text(DateFormat.jm().format(programare!.inceput),
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text(DateFormat.Hm().format(programare!.inceput),
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -362,7 +364,7 @@ class detaliiProgramareWidget extends StatelessWidget {
                     style: TextStyle(color: Colors.black45),
                   ),
                   const SizedBox(height: 5),
-                  Text(programare!.medic, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text(programare!.medic, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -382,7 +384,7 @@ class detaliiProgramareWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Manopera',
                           style: TextStyle(color: Colors.black45),
                         ),
