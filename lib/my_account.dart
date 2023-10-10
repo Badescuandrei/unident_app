@@ -409,11 +409,13 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
       // String extension = file.path.substring(file.path.lastIndexOf('.'));
       String extension = Path.extension(file.path);
       // 4. Convert to base64
-      final Uint8List byteFile = file.readAsBytesSync();
+      //final Uint8List byteFile = file.readAsBytesSync();
+      List<int> byteFile = await file.readAsBytes();
+      String base64 = base64Encode(byteFile);
       // final Uint8List byteFile = await getBase64FormattedFile(file.path);
       // String base64File = readAsBytesSync(file.path);
       String? res = await apiCallFunctions.uploadDocument(
-          pContinutDocument: base64.encode(byteFile), pDenumire: Path.basename(file.path), pExtensie: extension);
+          pContinutDocument: base64, pDenumire: Path.basename(file.path), pExtensie: extension);
       print(res);
     } else {
       print("nullismo");

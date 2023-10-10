@@ -229,7 +229,7 @@ class ApiCallFunctions {
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final Map<String, String> param = {
-      'pAdresaEmail': prefs.getString(pref_keys.userEmail)!,
+      'pAdresaMail': prefs.getString(pref_keys.userEmail)!,
       'pParolaMD5': prefs.getString(pref_keys.userPassMD5)!,
       'pSirBitiDocument': pContinutDocument,
       'pDenumire': pDenumire,
