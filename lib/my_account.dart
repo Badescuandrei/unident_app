@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
-
 import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:io';
 import '../utils/shared_pref_keys.dart' as pref_keys;
 import 'dart:typed_data';
@@ -396,7 +396,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   //   return;
   // }
   pickfile() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
     // 1. Pick the File
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -405,25 +405,22 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     );
     if (result != null) {
       File file = File(result.files.single.path!);
-      // 3. Get the extensiont type
-      String extension = file.path.substring(file.path.lastIndexOf('.'));
-
-      print(extension);
+      // 3. Get the extension type
+      // String extension = file.path.substring(file.path.lastIndexOf('.'));
+      String extension = Path.extension(file.path);
       // 4. Convert to base64
-      var byteFile = await getBase64FormateFile(file.path);
+      final Uint8List byteFile = file.readAsBytesSync();
+      // final Uint8List byteFile = await getBase64FormattedFile(file.path);
+      // String base64File = readAsBytesSync(file.path);
       String? res = await apiCallFunctions.uploadDocument(
-          pContinutDocument: byteFile,
-          pAdresaEmail: prefs.getString(pref_keys.userEmail)!,
-          pParolaMD5: prefs.getString(pref_keys.userPassMD5)!,
-          pDenumire: Path.basename(file.path),
-          pExtensie: extension);
+          pContinutDocument: base64.encode(byteFile), pDenumire: Path.basename(file.path), pExtensie: extension);
       print(res);
     } else {
       print("nullismo");
     }
   }
 
-  Future<Uint8List> getBase64FormateFile(String path) async {
+  Future<Uint8List> getBase64FormattedFile(String path) async {
     File file = File(path);
     print('File is = $file');
     // List<int> fileInByte = file.readAsBytesSync();

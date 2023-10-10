@@ -22,9 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   loadData() async {
     List<Medic>? meds = await apiCallFunctions.getListaMedici();
-
     List<MedicSlotLiber>? medsFiltrati = await apiCallFunctions.getListaMediciSlotLiber();
     Shared.medici.clear();
+    Shared.mediciFiltrati.clear();
     if (meds != null) {
       Shared.medici.addAll(meds);
     }
