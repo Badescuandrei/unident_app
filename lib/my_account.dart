@@ -406,15 +406,17 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     if (result != null) {
       File file = File(result.files.single.path!);
       // 3. Get the extensiont type
-      String asd = file.path.substring(file.path.lastIndexOf('.'));
+      String extension = file.path.substring(file.path.lastIndexOf('.'));
+
+      print(extension);
       // 4. Convert to base64
       var byteFile = await getBase64FormateFile(file.path);
       String? res = await apiCallFunctions.uploadDocument(
           pContinutDocument: byteFile,
           pAdresaEmail: prefs.getString(pref_keys.userEmail)!,
           pParolaMD5: prefs.getString(pref_keys.userPassMD5)!,
-          pDenumire: file.path,
-          pExtensie: asd);
+          pDenumire: Path.basename(file.path),
+          pExtensie: extension);
       print(res);
     } else {
       print("nullismo");
@@ -429,9 +431,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     final Uint8List bytes = await file.readAsBytes();
     //Base64Decoder().convert(file.toString().split(",").last);
     //NetworkImage(path) file.readAsBytesSync();
-    final Uint8List list = bytes.buffer.asUint8List();
+    // final Uint8List list = bytes.buffer.asUint8List();
     // print(list);
-    return list;
+    return bytes;
   }
 
   loadData() async {

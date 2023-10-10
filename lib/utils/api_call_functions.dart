@@ -233,7 +233,7 @@ class ApiCallFunctions {
       'pDenumire': pDenumire,
       'pExtensie': pExtensie,
       'pParolaMD5': pParolaMD5,
-      'pSirBitiDocument': pContinutDocument.toString(),
+      'pSirBitiDocument': base64.encode(pContinutDocument),
       'pAdresaEmail': pAdresaEmail,
     };
     String? res = await apiCall.apeleazaMetodaString(pNumeMetoda: 'IncarcaDocumentPacient', pParametrii: param);

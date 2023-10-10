@@ -36,12 +36,12 @@ Future<void> main() async {
 
   var loggedIn = prefs.getBool('loggedIn');
   runApp(
-    const MaterialApp(
+    MaterialApp(
       // localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
       localizationsDelegates: [GlobalMaterialLocalizations.delegate],
       supportedLocales: [Locale('en'), Locale('ro')],
-      //home: loggedIn == true ? const MyApp() : const LoginScreen(), //Andrei Badescu
-      home: MyApp(),
+      home: loggedIn == true ? const MyApp() : const LoginScreen(), //Andrei Badescu
+      // home: MyApp(),
       // theme: ThemeData(
       //   textTheme: GoogleFonts.openSansTextTheme(),
       // ), // use MaterialApp
@@ -58,11 +58,10 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      //home: Home(),
+      home: Home(),
       //home: GlisareImaginiScreen(),
-      home: ClinicsGlisareImaginiScreen(),
+      // home: ClinicsGlisareImaginiScreen(),
       //home: ClinicsScreen(),
-      
     );
   }
 }
