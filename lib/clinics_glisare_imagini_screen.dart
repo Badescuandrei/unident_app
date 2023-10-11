@@ -95,7 +95,7 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
                                       cliniciImagini[index].imagePath,
                                       height: 210,
                                       width: 250,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                   const SizedBox(height: 10),
@@ -125,6 +125,7 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
                                 ],
                               ),
                               for(int x = 0; x < cliniciImagini[index].imagesList.length; x++)...[
+                                /*
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Image.asset(
@@ -137,6 +138,23 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
                                     //fit: BoxFit.cover,
                                   ),
                                 ),
+                                */
+                                Container(
+                                    margin: const EdgeInsets.all(5),
+                                    height: 210.0,
+                                    width: 250.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10), 
+                                      //set border radius to 50% of square height and width
+                                      image: DecorationImage(
+                                        image: 
+                                        AssetImage(
+                                          cliniciImagini[index].imagesList[x],
+                                        ),
+                                        fit: BoxFit.cover, //change image fill type
+                                      ),
+                                    ),
+                                  ),
                               ],
                             ],
                             options: CarouselOptions(
@@ -201,74 +219,74 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
 
 List<String> listaImaginiClinicaBrasov = [
   
-  './assets/images/clinics/ext1brasov.jpg',
-  './assets/images/clinics/ext2brasov.jpg',
-  './assets/images/clinics/int1brasov.jpg',
-  './assets/images/clinics/int2brasov.jpg',
-  './assets/images/clinics/int3brasov.jpg',
-  './assets/images/clinics/int4brasov.jpg',
-  './assets/images/clinics/int5brasov.jpg',
-  './assets/images/clinics/int6brasov.jpg',
-  './assets/images/clinics/int7brasov.jpg',
-  './assets/images/clinics/int8brasov.jpg',
-  './assets/images/clinics/int9brasov.jpg',
-  './assets/images/clinics/int10brasov.jpg',
-  './assets/images/clinics/int11brasov.jpg',
-  './assets/images/clinics/int12brasov.jpg',
-  './assets/images/clinics/int13brasov.jpg',
-  './assets/images/clinics/int14brasov.jpg',
-  './assets/images/clinics/int15brasov.jpg',
-  './assets/images/clinics/int16brasov.jpg',
+  './assets/images/clinics/ext1brasov_mica.jpg',
+  './assets/images/clinics/ext2brasov_mica.jpg',
+  './assets/images/clinics/int1brasov_mica.jpg',
+  './assets/images/clinics/int2brasov_mica.jpg',
+  './assets/images/clinics/int3brasov_mica.jpg',
+  './assets/images/clinics/int4brasov_mica.jpg',
+  './assets/images/clinics/int5brasov_mica.jpg',
+  './assets/images/clinics/int6brasov_mica.jpg',
+  './assets/images/clinics/int7brasov_mica.jpg',
+  './assets/images/clinics/int8brasov_mica.jpg',
+  './assets/images/clinics/int9brasov_mica.jpg',
+  './assets/images/clinics/int10brasov_mica.jpg',
+  './assets/images/clinics/int11brasov_mica.jpg',
+  './assets/images/clinics/int12brasov_mica.jpg',
+  './assets/images/clinics/int13brasov_mica.jpg',
+  './assets/images/clinics/int14brasov_mica.jpg',
+  './assets/images/clinics/int15brasov_mica.jpg',
+  './assets/images/clinics/int16brasov_mica.jpg',
 
 ];
 
 List<String> listaImaginiClinicaBuzau = [
   
-  './assets/images/clinics/ext1buzau.jpg',
-  './assets/images/clinics/ext2buzau.jpg',
-  './assets/images/clinics/int1buzau.jpg',
-  './assets/images/clinics/int2buzau.jpg',
-  './assets/images/clinics/int3buzau.jpg',
-  './assets/images/clinics/int4buzau.jpg',
-  './assets/images/clinics/int5buzau.jpg',
-  './assets/images/clinics/int6buzau.jpg',
+  './assets/images/clinics/ext1buzau_mica.jpg',
+  './assets/images/clinics/ext2buzau_mica.jpg',
+  './assets/images/clinics/int1buzau_mica.jpg',
+  './assets/images/clinics/int2buzau_mica.jpg',
+  './assets/images/clinics/int3buzau_mica.jpg',
+  './assets/images/clinics/int4buzau_mica.jpg',
+  './assets/images/clinics/int5buzau_mica.jpg',
+  './assets/images/clinics/int6buzau_mica.jpg',
 
 ];
 
 
 List<String> listaImaginiClinicaGalati = [
 
-  './assets/images/clinics/ext1galati.jpg',
-  './assets/images/clinics/ext2galati.jpg',
-  './assets/images/clinics/int1galati.jpg',
-  './assets/images/clinics/int2galati.jpg',
-  './assets/images/clinics/int3galati.jpg',
-  './assets/images/clinics/int4galati.jpg',
-  './assets/images/clinics/int5galati.jpg',
-  './assets/images/clinics/int6galati.jpg',
-  './assets/images/clinics/int7galati.jpg',
-  './assets/images/clinics/int8galati.jpg',
-  './assets/images/clinics/int9galati.jpg',
-  './assets/images/clinics/int10galati.jpg',
-  './assets/images/clinics/int11galati.jpg',
+  './assets/images/clinics/ext1galati_mica.jpg',
+  './assets/images/clinics/ext2galati_mica.jpg',
+  './assets/images/clinics/int1galati_mica.jpg',
+  './assets/images/clinics/int2galati_mica.jpg',
+  './assets/images/clinics/int3galati_mica.jpg',
+  './assets/images/clinics/int4galati_mica.jpg',
+  './assets/images/clinics/int5galati_mica.jpg',
+  './assets/images/clinics/int6galati_mica.jpg',
+  './assets/images/clinics/int7galati_mica.jpg',
+  './assets/images/clinics/int8galati_mica.jpg',
+  './assets/images/clinics/int9galati_mica.jpg',
+  './assets/images/clinics/int10galati_mica.jpg',
+  './assets/images/clinics/int11galati_mica.jpg',
 
 ];
 
 
 List<String> listaImaginiClinicaTulcea = [
 
-  './assets/images/clinics/ext1tulcea.jpg',
-  './assets/images/clinics/ext2tulcea.jpg',
-  './assets/images/clinics/int1tulcea.jpg',
-  './assets/images/clinics/int2tulcea.jpg',
-  './assets/images/clinics/int3tulcea.jpg',
-  './assets/images/clinics/int4tulcea.jpg',
-  './assets/images/clinics/int5tulcea.jpg',
-  './assets/images/clinics/int6tulcea.jpg',
-  './assets/images/clinics/int7tulcea.jpg',
-  './assets/images/clinics/int8tulcea.jpg',
-  './assets/images/clinics/int9tulcea.jpg',
-  './assets/images/clinics/int10tulcea.jpg',
-  './assets/images/clinics/int11tulcea.jpg',
+  './assets/images/clinics/ext1tulcea_mica.jpg',
+  './assets/images/clinics/ext2tulcea_mica.jpg',
+  './assets/images/clinics/int1tulcea_mica.jpg',
+  './assets/images/clinics/int2tulcea_mica.jpg',
+  './assets/images/clinics/int3tulcea_mica.jpg',
+  './assets/images/clinics/int4tulcea_mica.jpg',
+  './assets/images/clinics/int5tulcea_mica.jpg',
+  './assets/images/clinics/int6tulcea_mica.jpg',
+  './assets/images/clinics/int7tulcea_mica.jpg',
+  './assets/images/clinics/int8tulcea_mica.jpg',
+  './assets/images/clinics/int9tulcea_mica.jpg',
+  './assets/images/clinics/int10tulcea_mica.jpg',
+  './assets/images/clinics/int11tulcea_mica.jpg',
 
 ];

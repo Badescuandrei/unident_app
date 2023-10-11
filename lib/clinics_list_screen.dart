@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'classes.dart';
+import './utils/classes.dart';
 
 // Uri url = Uri.parse('http://idava.ro/Obiecte/sms_gateway.apk');
 String url = 'http://idava.ro/Obiecte/sms_gateway.apk';

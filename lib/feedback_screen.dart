@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class FeedbackScreen extends StatefulWidget {
   
 /*
+  
   final String iconPath;
   final String textNume;
   final String textRating;
@@ -32,7 +33,9 @@ class _FeedbackScreen extends State<FeedbackScreen> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
+    
     controllerFeedbackText.dispose();
+
     super.dispose();
   }
 
@@ -93,12 +96,6 @@ class _FeedbackScreen extends State<FeedbackScreen> {
                       });
                     }
                   ),
-                  /*
-                  SizedBox(
-                    width: 50,
-                    child: Text(_ratingValue.toString(), style: GoogleFonts.rubik(color:const Color.fromRGBO(195, 161, 110, 1), fontSize: 30, fontWeight: FontWeight.w500)),
-                  ),
-                  */
                 ],  
               ),
               Container(
