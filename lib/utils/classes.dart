@@ -155,6 +155,7 @@ class DetaliiProgramare {
 }
 
 class Programare {
+  final String hasFeedback;
   final String id;
   final DateTime inceput, sfarsit;
   final String medic, categorie;
@@ -165,7 +166,8 @@ class Programare {
   static const String statusAnulat = "Anulat";
 
   Programare(
-      {required this.id,
+      {required this.hasFeedback,
+      required this.id,
       required this.medic,
       required this.anulata,
       required this.categorie,
