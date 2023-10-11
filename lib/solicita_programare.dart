@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:intl/intl.dart';
 import 'package:unident_app/horizontal_week_calendar.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
 
@@ -92,7 +93,6 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
                               // selectedDate.add(orarProgramari.values.elementAt(index));
                               // print(DateFormat.jms().format(selectedDate));
                               setState(() {
-                                wasHourSelected = true;
                                 selectedIndex = index;
                                 selectedDate = selectedDate.copyWith(
                                     hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
@@ -163,6 +163,7 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
             const SizedBox(height: 30),
             GestureDetector(
               onTap: () {
+                print(selectedDate.toString());
                 sendAppointmentRequest().then((value) {
                   value == null
                       ? null
@@ -252,7 +253,7 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
       String? res = await apiCallFunctions.adaugaProgramare(
           pIdCategorie: '',
           pIdMedic: '',
-          pDataProgramareDDMMYYYYHHmm: selectedDate.toString(),
+          pDataProgramareDDMMYYYYHHmm: DateFormat('ddMMyyyyHHmm').format(selectedDate),
           pObservatiiProgramare: controllerDetails.text,
           pIdSediu: '',
           pIdMembruFamilie: '');
