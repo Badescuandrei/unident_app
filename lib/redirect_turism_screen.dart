@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-String url = 'https://unident.ro/onorarii/';
+String url = 'https://unident.ro/turism-dentar-in-romania/';
 final _drawerController = ZoomDrawerController();
 
 class RedirectTurism extends StatefulWidget {
@@ -33,7 +33,7 @@ class _RedirectTurismState extends State<RedirectTurism> {
       ),
     )
     ..loadRequest(
-      Uri.parse('https://unident.ro/turism-dentar-in-romania/'),
+      Uri.parse(url),
     );
 
   @override
