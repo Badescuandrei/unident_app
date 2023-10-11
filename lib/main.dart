@@ -10,8 +10,8 @@ import 'package:unident_app/login.dart';
 import 'package:unident_app/my_account.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:unident_app/glisare_imagini_screen_IGV_only.dart';
-//import 'package:unident_app/clinics_glisare_imagini_screen.dart';
-import 'package:unident_app/feedback_screen.dart';
+import 'package:unident_app/clinics_glisare_imagini_screen.dart';
+//import 'package:unident_app/feedback_screen.dart';
 //import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
 
 //import 'package:unident_app/clinics_list_screen.dart';
@@ -61,9 +61,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       //home: Home(),
       //home: GlisareImaginiScreen(),
-      //home: ClinicsGlisareImaginiScreen(),
+      home: ClinicsGlisareImaginiScreen(),
       //home: ClinicsScreen(),
-      home: FeedbackScreen(),
+      //home: FeedbackScreen(),
       
     );
   }

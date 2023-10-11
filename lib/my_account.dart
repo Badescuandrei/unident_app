@@ -1,10 +1,18 @@
+// ignore_for_file: avoid_print
+
+import 'dart:convert';
 import 'dart:io';
+import '../utils/shared_pref_keys.dart' as pref_keys;
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as Path;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:unident_app/home_screen.dart';
 
 class MyAccountScreen extends StatefulWidget {
   const MyAccountScreen({super.key});
@@ -49,7 +57,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -63,8 +71,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                               const CircleAvatar(
                                   backgroundImage: AssetImage('./assets/images/defaultProfilePicture.png'), radius: 60),
                               Positioned(
-                                top: 110,
-                                right: 5,
+                                top: 80,
+                                right: 0,
                                 child: GestureDetector(
                                   onTap: getImage,
                                   child: Image.asset(
@@ -102,7 +110,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       ],
                     ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             const Text(
               'Aici puteti gasi si modifica datele dumneavoastra personale, la fel puteti urmari planul de tratament si adauga rezultatele analizelor medicale',
               style: TextStyle(
@@ -227,44 +235,47 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.15,
-              width: MediaQuery.of(context).size.width * 0.85,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(20, 5, 5, 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Adauga rezultatele analizelor',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: pickfile,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.15,
+                width: MediaQuery.of(context).size.width * 0.85,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(20, 5, 5, 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Adauga rezultatele analizelor',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                              'In cazul unor manopere ce necesita anumite date despre starea dvs., ne puteti trimite rezultatele direct din aplicatie ',
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
-                        ],
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                                'In cazul unor manopere ce necesita anumite date despre starea dvs., ne puteti trimite rezultatele direct din aplicatie ',
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 15),
@@ -384,6 +395,44 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   //   });
   //   return;
   // }
+  pickfile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // 1. Pick the File
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      // 2. Only allow these formats
+      allowedExtensions: ['jpg', 'pdf', 'doc', 'png'],
+    );
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      // 3. Get the extensiont type
+      String asd = file.path.substring(file.path.lastIndexOf('.'));
+      // 4. Convert to base64
+      var byteFile = await getBase64FormateFile(file.path);
+      String? res = await apiCallFunctions.uploadDocument(
+          pContinutDocument: byteFile,
+          pAdresaEmail: prefs.getString(pref_keys.userEmail)!,
+          pParolaMD5: prefs.getString(pref_keys.userPassMD5)!,
+          pDenumire: file.path,
+          pExtensie: asd);
+      print(res);
+    } else {
+      print("nullismo");
+    }
+  }
+
+  Future<Uint8List> getBase64FormateFile(String path) async {
+    File file = File(path);
+    print('File is = $file');
+    // List<int> fileInByte = file.readAsBytesSync();
+    // String fileInBase64 = base64Encode(fileInByte);
+    final Uint8List bytes = await file.readAsBytes();
+    //Base64Decoder().convert(file.toString().split(",").last);
+    //NetworkImage(path) file.readAsBytesSync();
+    final Uint8List list = bytes.buffer.asUint8List();
+    // print(list);
+    return list;
+  }
 
   loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

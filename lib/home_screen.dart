@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  height: 230,
+                  height: 245,
                   child: ListView.separated(
                     separatorBuilder: (context, index) {
                       return const SizedBox(width: 20);
@@ -130,10 +130,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
+                          print(Shared.medici[index].profesii);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DoctorDetailsScreen(
+                                        miniCV: Shared.medici[index].miniCv,
+                                        jobs: Shared.medici[index].profesii,
                                         id: Shared.medici[index].id,
                                         nume: Shared.medici[index].nume,
                                         poza: Shared.medici[index].poza,
@@ -208,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: SizedBox(
-                height: 150,
+                height: 140,
                 child: ListView.separated(
                     physics: const ScrollPhysics(),
                     scrollDirection: Axis.horizontal,
@@ -219,6 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DoctorDetailsScreen(
+                                        miniCV: Shared.medici[index].miniCv,
+                                        jobs: Shared.medici[index].profesii,
                                         nume: Shared.medici[index].nume,
                                         id: Shared.medici[index].id,
                                         poza: Shared.medici[index].poza,
@@ -251,41 +256,50 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const Column(
                                   children: [SizedBox(width: 20)],
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      // TODO adauga sediu
-                                      'Clinica Brasov',
-                                      // Shared.mediciFiltrati[index].listaSedii[0],
-                                      style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 25),
-                                    Text(
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      // TODO adauga nume
-                                      Shared.mediciFiltrati[index].nume,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white,
+                                Flexible(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        // TODO adauga sediu
+                                        Shared.mediciFiltrati[index].judet,
+                                        // Shared.mediciFiltrati[index].listaSedii[0],
+                                        style:
+                                            TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
                                       ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text(
-                                      // TODO Adauga data aici, de luat in considerare ca este posibil sa nu existe
-                                      DateFormat('EEEE, d.M.yyyy', 'ro')
-                                          .format(Shared.mediciFiltrati[index].dataPrimulSlotLiber)
-                                          .capitalizeFirst(),
-                                      style: const TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w800,
-                                        color: Color(0xFFC3A16E),
+                                      const SizedBox(height: 25),
+                                      Flexible(
+                                        child: Text(
+                                          softWrap: true,
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                          // TODO adauga nume
+                                          Shared.mediciFiltrati[index].nume == ""
+                                              ? "Locatie indisponibila"
+                                              : Shared.mediciFiltrati[index].nume,
+                                          // "Maria Magdalena Mgdalanovici ",
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
-                                    )
-                                  ],
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        // TODO Adauga data aici, de luat in considerare ca este posibil sa nu existe
+                                        DateFormat('EEEE, d.M.yyyy', 'ro')
+                                            .format(Shared.mediciFiltrati[index].dataPrimulSlotLiber)
+                                            .capitalizeFirst(),
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w800,
+                                          color: Color(0xFFC3A16E),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 )
                               ]),
                         ),
@@ -297,7 +311,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: Shared.mediciFiltrati.length),
               ),
             ),
-            const SizedBox(height: 15),
           ],
         ),
       ),
@@ -327,15 +340,15 @@ class homeScreen_echipaNoastraDoctorWidget extends StatelessWidget {
       ),
       // margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
-      width: 120,
+      width: 130,
       child: Column(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.memory(
               poza,
-              height: 130,
-              width: 100,
+              height: 120,
+              width: 110,
               fit: BoxFit.cover,
             ),
           ),
@@ -355,7 +368,7 @@ class homeScreen_echipaNoastraDoctorWidget extends StatelessWidget {
           const SizedBox(height: 5),
           for (var job in jobs)
             Text(
-              jobs[0],
+              job,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.black54,
