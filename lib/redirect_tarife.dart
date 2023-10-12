@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:unident_app/home.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 String url = 'https://unident.ro/onorarii/';
@@ -21,7 +20,7 @@ class _RedirectTarifState extends State<RedirectTarif> {
   final UniqueKey _key = UniqueKey();
 
   var controller = WebViewController()
-    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setJavaScriptMode(JavaScriptMode.disabled)
     ..setBackgroundColor(const Color(0x00000000))
     ..setNavigationDelegate(
       NavigationDelegate(
@@ -33,9 +32,7 @@ class _RedirectTarifState extends State<RedirectTarif> {
         onWebResourceError: (WebResourceError error) {},
       ),
     )
-    ..loadRequest(
-      Uri.parse('https://unident.ro/onorarii/'),
-    );
+    ..loadRequest(Uri.parse(url));
 
   @override
   void initState() {

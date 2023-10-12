@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:unident_app/home.dart';
 import 'package:unident_app/home_screen.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
+import 'package:unident_app/utils/api_firebase.dart';
+import 'package:unident_app/utils/classes.dart';
 import '../utils/shared_pref_keys.dart' as pref_keys;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/functions.dart';
@@ -243,13 +245,12 @@ class _LoginScreenState extends State<LoginScreen> {
       prefs.setString(pref_keys.permiteIntroducereaDeProgramari, info[20]);
       prefs.setBool(pref_keys.loggedIn, true);
       prefs.setBool(pref_keys.firstTime, false);
-      if (context.mounted) {
-        Future.delayed(const Duration(seconds: 2), () {
-          Navigator.of(context)
-              .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const Home()), (route) => false);
-        });
-      }
-      return;
+      Future.delayed(const Duration(seconds: 2), () {
+        saveTokenToDB(Shared.FCMtoken);
+        Navigator.of(context)
+            .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const Home()), (route) => false);
+      });
     }
+    return;
   }
 }

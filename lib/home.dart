@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:unident_app/clinics_glisare_imagini_screen.dart';
+import 'package:unident_app/redirect_promotii_lunare.dart';
 import 'package:unident_app/redirect_turism_screen.dart';
 import 'package:unident_app/solicita_programare.dart';
 import 'package:unident_app/terms_and_conditions_screen.dart';
@@ -10,16 +11,20 @@ import 'package:unident_app/doctor_details_screen.dart';
 import 'package:unident_app/home_screen.dart';
 import 'package:unident_app/login.dart';
 import 'package:unident_app/my_account.dart';
-import 'package:unident_app/planul_de_tratament_screen.dart';
+import 'package:unident_app/programari_screen.dart';
 import 'package:unident_app/register.dart';
 import 'package:unident_app/main.dart';
 import 'package:unident_app/our_medics.dart';
+import 'package:unident_app/tratamente.dart';
 import 'package:unident_app/treatment_plan_screen.dart';
 import 'package:unident_app/redirect_tarife.dart';
+import 'package:unident_app/utils/api_call_functions.dart';
+import 'package:unident_app/utils/classes.dart';
 import 'horizontal_week_calendar.dart';
 
 final _drawerController = ZoomDrawerController();
 // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+ApiCallFunctions apiCallFunctions = ApiCallFunctions();
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -38,6 +43,17 @@ class _HomeState extends State<Home> {
   void setPage(index) {
     setState(() {
       currentIndexDrawer = index;
+      if (index > 3) {
+        currentIndexNavBar = -1;
+      } else if (index == 0) {
+        currentIndexNavBar = 0;
+      } else if (index == 1) {
+        currentIndexNavBar = 1;
+      } else if (index == 2) {
+        currentIndexNavBar = 2;
+      } else if (index == 3) {
+        currentIndexNavBar = 3;
+      }
     });
   }
 
@@ -108,19 +124,21 @@ class _HomeState extends State<Home> {
       case 0:
         return const HomeScreen();
       case 1:
-        return const SolicitaProgramareScreen();
+        return const ProgramariScreen();
       case 2:
-        return const TratamentScreen();
+        return const TratamenteScreen();
       case 3:
         return const RedirectTarif();
       case 4:
         return const OurMedicsScreen();
       case 5:
-        return const ClinicsGlisareImaginiScreen();
+        return const ClinicsScreen();
       case 6:
-        return const MyAccountScreen();
+        return const RedirectPromotiiLunare();
       case 7:
         return const RedirectTurism();
+      case 8:
+        return const MyAccountScreen();
       default:
         return const HomeScreen();
     }

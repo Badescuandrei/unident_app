@@ -36,6 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void loadData2() async {
+    List<MembruFamilie> f = await apiCallFunctions.getListaFamilie();
+    Shared.familie.addAll(f);
+    print('ASta este ${f.length}');
+  }
+
   bool isClickedFunc(index) {
     isClicked = selectedIndex == index ? true : false;
     return isClicked;
@@ -43,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    loadData2();
     loadData();
     super.initState();
   }

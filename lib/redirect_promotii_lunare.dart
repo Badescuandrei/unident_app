@@ -3,24 +3,25 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:unident_app/home.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-String url = 'https://unident.ro/turism-dentar-in-romania/';
+String url = 'https://unident.ro/pachete/';
 final _drawerController = ZoomDrawerController();
 
-class RedirectTurism extends StatefulWidget {
-  const RedirectTurism({super.key});
+class RedirectPromotiiLunare extends StatefulWidget {
+  const RedirectPromotiiLunare({super.key});
 
   @override
-  State<RedirectTurism> createState() => _RedirectTurismState();
+  State<RedirectPromotiiLunare> createState() => _RedirectPromotiiLunareState();
 }
 
-class _RedirectTurismState extends State<RedirectTurism> {
+class _RedirectPromotiiLunareState extends State<RedirectPromotiiLunare> {
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
   final UniqueKey _key = UniqueKey();
 
   var controller = WebViewController()
-    ..setJavaScriptMode(JavaScriptMode.disabled)
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
     ..setNavigationDelegate(
       NavigationDelegate(
@@ -32,15 +33,13 @@ class _RedirectTurismState extends State<RedirectTurism> {
         onWebResourceError: (WebResourceError error) {},
       ),
     )
-    ..loadRequest(
-      Uri.parse(url),
-    );
+    ..loadRequest(Uri.parse(url));
 
-  @override
-  void initState() {
-    super.initState();
-    pageScroll();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // pageScroll();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class _RedirectTurismState extends State<RedirectTurism> {
           },
           icon: const Icon(Icons.menu),
         ),
-        title: const Text('TURISM DENTAR'),
+        title: const Text('PROMOTII LUNARE'),
         centerTitle: true,
         backgroundColor: Colors.purple[900],
       ),
@@ -74,9 +73,9 @@ class _RedirectTurismState extends State<RedirectTurism> {
     }
   }
 
-  void pageScroll() async {
-    Future.delayed(const Duration(milliseconds: 10), () {
-      controller.scrollTo(0, 1000);
-    });
-  }
+  // void pageScroll() async {
+  //   Future.delayed(const Duration(milliseconds: 500), () {
+  //     controller.scrollTo(0, 800);
+  //   });
+  // }
 }

@@ -1,8 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 //import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:unident_app/terms_and_conditions_screen.dart';
+import 'package:unident_app/firebase_options.dart';
+import 'package:unident_app/terms_and_conditions_screen.dart';
 import 'package:unident_app/home.dart';
 //import 'package:unident_app/home_screen.dart';
 import 'package:unident_app/horizontal_week_calendar.dart';
@@ -11,7 +13,7 @@ import 'package:unident_app/login.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:unident_app/glisare_imagini_screen_IGV_only.dart';
 import 'package:unident_app/clinics_glisare_imagini_screen.dart';
-//import 'package:unident_app/feedback_screen.dart';
+import 'package:unident_app/utils/api_firebase.dart';
 //import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
 
 //import 'package:unident_app/clinics_list_screen.dart';
@@ -34,7 +36,8 @@ Map<String, Duration> orarProgramari = {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseApi().initNotifications();
   var loggedIn = prefs.getBool('loggedIn');
   runApp(
     MaterialApp(

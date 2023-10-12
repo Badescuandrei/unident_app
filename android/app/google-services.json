@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883769903738",
+    "project_id": "myunident",
+    "storage_bucket": "myunident.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883769903738:android:6afa4a1a927eb86fad89c3",
+        "android_client_info": {
+          "package_name": "com.example.unident_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCecDEJz-Tj59BpR9onyD9YyHIeneyFv4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
