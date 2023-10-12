@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class Shared {
   static GlobalKey<NavigatorState> sharedNavigatorKey = GlobalKey<NavigatorState>();
   // static String flavor = '';
+  static String FCMtoken = '';
   static String idMembruFamilieConectat = '_';
   static String sediuPacient = '';
   static List<Medic> medici = <Medic>[];
@@ -67,12 +68,20 @@ class Medic {
 }
 
 class Clinic {
+  final String tel;
+  final String mail;
   final String imagePath;
   final String clinicName;
   final String location;
   final String? nume;
 
-  Clinic({required this.imagePath, required this.clinicName, required this.location, this.nume});
+  Clinic(
+      {required this.tel,
+      required this.mail,
+      required this.imagePath,
+      required this.clinicName,
+      required this.location,
+      this.nume});
 }
 
 class MedicSlotLiber {
