@@ -223,18 +223,17 @@ class ApiCallFunctions {
   }
 
   Future<String?> uploadDocument({
-    required Uint8List pContinutDocument,
-    required String pAdresaEmail,
-    required String pParolaMD5,
+    required String pContinutDocument,
     required String pDenumire,
     required String pExtensie,
   }) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     final Map<String, String> param = {
+      'pAdresaMail': prefs.getString(pref_keys.userEmail)!,
+      'pParolaMD5': prefs.getString(pref_keys.userPassMD5)!,
+      'pSirBitiDocument': pContinutDocument,
       'pDenumire': pDenumire,
       'pExtensie': pExtensie,
-      'pParolaMD5': pParolaMD5,
-      'pSirBitiDocument': pContinutDocument.toString(),
-      'pAdresaEmail': pAdresaEmail,
     };
     String? res = await apiCall.apeleazaMetodaString(pNumeMetoda: 'IncarcaDocumentPacient', pParametrii: param);
 

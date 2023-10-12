@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:unident_app/terms_and_conditions_screen.dart';
+//import 'package:unident_app/terms_and_conditions_screen.dart';
 import 'package:unident_app/home.dart';
-import 'package:unident_app/home_screen.dart';
+//import 'package:unident_app/home_screen.dart';
 import 'package:unident_app/horizontal_week_calendar.dart';
 import 'package:unident_app/login.dart';
-import 'package:unident_app/my_account.dart';
+//import 'package:unident_app/my_account.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:unident_app/glisare_imagini_screen_IGV_only.dart';
 import 'package:unident_app/clinics_glisare_imagini_screen.dart';
@@ -37,12 +37,12 @@ Future<void> main() async {
 
   var loggedIn = prefs.getBool('loggedIn');
   runApp(
-    const MaterialApp(
+    MaterialApp(
       // localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
       localizationsDelegates: [GlobalMaterialLocalizations.delegate],
       supportedLocales: [Locale('en'), Locale('ro')],
-      //home: loggedIn == true ? const MyApp() : const LoginScreen(), //Andrei Badescu
-      home: MyApp(),
+      home: loggedIn == true ? const MyApp() : const LoginScreen(), //Andrei Badescu
+      // home: MyApp(),
       // theme: ThemeData(
       //   textTheme: GoogleFonts.openSansTextTheme(),
       // ), // use MaterialApp
@@ -59,9 +59,9 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      //home: Home(),
+      home: Home(),
       //home: GlisareImaginiScreen(),
-      home: ClinicsGlisareImaginiScreen(),
+      // home: ClinicsGlisareImaginiScreen(),
       //home: ClinicsScreen(),
       //home: FeedbackScreen(),
       

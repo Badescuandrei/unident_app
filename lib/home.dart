@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:unident_app/clinics_glisare_imagini_screen.dart';
 import 'package:unident_app/redirect_turism_screen.dart';
 import 'package:unident_app/solicita_programare.dart';
 import 'package:unident_app/terms_and_conditions_screen.dart';
@@ -115,7 +116,7 @@ class _HomeState extends State<Home> {
       case 4:
         return const OurMedicsScreen();
       case 5:
-        return const ClinicsScreen();
+        return const ClinicsGlisareImaginiScreen();
       case 6:
         return const MyAccountScreen();
       case 7:
