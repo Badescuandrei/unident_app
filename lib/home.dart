@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
       case 4:
         return const OurMedicsScreen();
       case 5:
-        return const ClinicsGlisareImaginiScreen();
+        return const ClinicsScreen();
       case 6:
         return const RedirectPromotiiLunare();
       case 7:
