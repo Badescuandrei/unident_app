@@ -5,6 +5,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unident_app/apinio.dart';
+import 'package:unident_app/feedback_screen.dart';
 import 'package:unident_app/utils/api_call.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
 import 'package:unident_app/utils/classes.dart';
@@ -59,7 +60,7 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             },
             icon: const Icon(Icons.menu),
           ),
-          title: const Text('Planul de tratament', style: TextStyle(fontSize: 20)),
+          title: const Text('Programari', style: TextStyle(fontSize: 20)),
           backgroundColor: Colors.purple[900],
           centerTitle: true),
       body: SafeArea(
@@ -425,7 +426,8 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             inceput: date,
             sfarsit: dateSf,
             id: l[6],
-            hasFeedback: l[7]);
+            hasFeedback: l[7],
+            idMedic: l[8]);
         programariViitoare.add(p);
       }
 
@@ -458,7 +460,8 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             anulata: l[5],
             inceput: date,
             sfarsit: dateSf,
-            hasFeedback: l[7]);
+            hasFeedback: l[7],
+            idMedic: l[8]);
         programariTrecute.add(p);
       }
     }
@@ -467,8 +470,8 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
     Programari? pP = Programari(trecute: programariTrecute, viitoare: programariViitoare);
     print(" ASta e ${programariViitoare.length}");
     setState(() {
-      viitoare = programariViitoare;
-      trecute = programariTrecute;
+      viitoare = programariViitoare.reversed.toList();
+      trecute = programariTrecute.reversed.toList();
     });
     // print(" ASta e ${trecute.length}");
     return pP;
@@ -550,7 +553,8 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             inceput: date,
             sfarsit: dateSf,
             id: l[6],
-            hasFeedback: l[7]);
+            hasFeedback: l[7],
+            idMedic: l[8]);
         programariViitoareCopil.add(p);
       }
 
@@ -583,7 +587,8 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             anulata: l[5],
             inceput: date,
             sfarsit: dateSf,
-            hasFeedback: l[7]);
+            hasFeedback: l[7],
+            idMedic: l[8]);
         programariTrecuteCopil.add(p);
       }
     }
@@ -592,21 +597,26 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
     Programari? pP = Programari(trecute: programariTrecuteCopil, viitoare: programariViitoareCopil);
     print(" ASta e ${programariViitoareCopil.length}");
     setState(() {
-      viitoareCopil = programariViitoareCopil;
-      trecuteCopil = programariTrecuteCopil;
+      viitoareCopil = programariViitoareCopil.reversed.toList();
+      trecuteCopil = programariTrecuteCopil.reversed.toList();
     });
     // print(" ASta e ${trecute.length}");
     return pP;
   }
 }
 
-class detaliiProgramareWidget extends StatelessWidget {
+class detaliiProgramareWidget extends StatefulWidget {
   final Programare? programare;
   const detaliiProgramareWidget({
     super.key,
     this.programare,
   });
 
+  @override
+  State<detaliiProgramareWidget> createState() => _detaliiProgramareWidgetState();
+}
+
+class _detaliiProgramareWidgetState extends State<detaliiProgramareWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -632,7 +642,7 @@ class detaliiProgramareWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        DateFormat('d.M.yyyy').format(programare!.inceput).capitalizeFirst(),
+                        DateFormat('d.M.yyyy').format(widget.programare!.inceput).capitalizeFirst(),
                         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -648,7 +658,7 @@ class detaliiProgramareWidget extends StatelessWidget {
                         style: TextStyle(color: Colors.black45),
                       ),
                       const SizedBox(height: 5),
-                      Text(DateFormat.Hm().format(programare!.inceput),
+                      Text(DateFormat.Hm().format(widget.programare!.inceput),
                           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -663,7 +673,7 @@ class detaliiProgramareWidget extends StatelessWidget {
                         style: TextStyle(color: Colors.black45),
                       ),
                       const SizedBox(height: 5),
-                      Text(programare!.medic, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text(widget.programare!.medic, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
@@ -688,7 +698,7 @@ class detaliiProgramareWidget extends StatelessWidget {
                               style: TextStyle(color: Colors.black45),
                             ),
                             const SizedBox(height: 5),
-                            Text(programare!.categorie,
+                            Text(widget.programare!.categorie,
                                 style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
                           ],
                         ),
@@ -714,24 +724,24 @@ class detaliiProgramareWidget extends StatelessWidget {
                   width: 120,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
-                      color: programare!.status == "Programat"
+                      color: widget.programare!.status == "Programat"
                           ? Colors.blue
-                          : programare!.status == "Confirmat"
+                          : widget.programare!.status == "Confirmat"
                               ? Colors.green
-                              : programare!.status == "Finalizat" || programare!.status == "Terminat"
+                              : widget.programare!.status == "Finalizat" || widget.programare!.status == "Terminat"
                                   ? Colors.yellow
-                                  : programare!.status.startsWith("Anulat")
+                                  : widget.programare!.status.startsWith("Anulat")
                                       ? Colors.red
                                       : Colors.grey),
                   child: Center(
                     child: Text(
-                        programare!.status == "Programat"
+                        widget.programare!.status == "Programat"
                             ? "PROGRAMAT"
-                            : programare!.status == "Confirmat"
+                            : widget.programare!.status == "Confirmat"
                                 ? "CONFIRMAT"
-                                : programare!.status == "Finalizat" || programare!.status == "Terminat"
+                                : widget.programare!.status == "Finalizat" || widget.programare!.status == "Terminat"
                                     ? "FINALIZAT"
-                                    : programare!.status.startsWith("Anulat")
+                                    : widget.programare!.status.startsWith("Anulat")
                                         ? "ANULAT"
                                         : "ANULAT",
                         textAlign: TextAlign.center,
@@ -745,7 +755,7 @@ class detaliiProgramareWidget extends StatelessWidget {
             )
           ]),
         ),
-        programare!.hasFeedback == "0"
+        widget.programare!.hasFeedback == "0" && widget.programare!.inceput.isBefore(DateTime.now())
             ? Positioned(
                 right: 2,
                 top: 2,
@@ -755,9 +765,16 @@ class detaliiProgramareWidget extends StatelessWidget {
                       Icons.star,
                       color: Colors.yellow,
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FeedbackScreen(
+                                    programare: widget.programare!,
+                                  ))).then((value) => setState(() {}));
+                    }),
               )
-            : const CircularProgressIndicator(),
+            : const SizedBox(),
       ],
     );
   }

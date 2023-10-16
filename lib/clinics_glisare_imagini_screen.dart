@@ -10,33 +10,33 @@ String url = 'http://idava.ro/Obiecte/sms_gateway.apk';
 
 List<ClinicWithImages> cliniciImagini = [
   ClinicWithImages(
-      clinicName: 'Unident Tulcea',
-      imagePath: './assets/images/clinics/clinica_tulcea_50.jpg',
-      nume: 'Strada Toamnei nr. 7A',
-      location: 'Unident Clinica Dentara Premium, Tulcea',
-      imagesList: listaImaginiClinicaTulcea,
-  ),      
+    clinicName: 'Unident Tulcea',
+    imagePath: './assets/images/clinics/clinica_tulcea_50.jpg',
+    nume: 'Strada Toamnei nr. 7A',
+    location: 'Unident Clinica Dentara Premium, Tulcea',
+    imagesList: listaImaginiClinicaTulcea,
+  ),
   ClinicWithImages(
-      nume: 'Strada Brailei nr. 171A',
-      clinicName: 'Unident Galati',
-      imagePath: './assets/images/clinics/clinica_galati_50.jpg',
-      location: 'Unident Clinica Dentara Premium, Galati ',
-      imagesList: listaImaginiClinicaGalati,
-      ),
+    nume: 'Strada Brailei nr. 171A',
+    clinicName: 'Unident Galati',
+    imagePath: './assets/images/clinics/clinica_galati_50.jpg',
+    location: 'Unident Clinica Dentara Premium, Galati ',
+    imagesList: listaImaginiClinicaGalati,
+  ),
   ClinicWithImages(
-      nume: 'Bulevardul Unirii nr. P7',
-      clinicName: 'Unident Buzau',
-      imagePath: './assets/images/clinics/clinica_buzau_50.jpg',
-      location: 'Unident Clinica Dentara Premium, Buzau',
-      imagesList: listaImaginiClinicaBuzau,
-      ),
+    nume: 'Bulevardul Unirii nr. P7',
+    clinicName: 'Unident Buzau',
+    imagePath: './assets/images/clinics/clinica_buzau_50.jpg',
+    location: 'Unident Clinica Dentara Premium, Buzau',
+    imagesList: listaImaginiClinicaBuzau,
+  ),
   ClinicWithImages(
-      nume: 'Strada Ștefan Baciu nr. 2',
-      clinicName: 'Unident Brasov',
-      imagePath: './assets/images/clinics/clinica_brasov_50.jpg',
-      location: 'Unident Clinica Dentara Premium, Brasov',
-      imagesList: listaImaginiClinicaBrasov,
-      ),
+    nume: 'Strada Ștefan Baciu nr. 2',
+    clinicName: 'Unident Brasov',
+    imagePath: './assets/images/clinics/clinica_brasov_50.jpg',
+    location: 'Unident Clinica Dentara Premium, Brasov',
+    imagesList: listaImaginiClinicaBrasov,
+  ),
 ];
 
 class ClinicsGlisareImaginiScreen extends StatelessWidget {
@@ -55,7 +55,7 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
           title: const Text('Clinicile Unident', style: TextStyle(fontSize: 32)),
           backgroundColor: Colors.purple[900],
           centerTitle: true),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[300],
       body: SafeArea(
           child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -82,50 +82,51 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                     margin: const EdgeInsets.fromLTRB(60, 0, 60, 10),
-                    child:  Column(
-                      children:[
-                          CarouselSlider(
-                            items: [
-                              Column (
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      cliniciImagini[index].imagePath,
-                                      height: 210,
-                                      width: 250,
-                                      fit: BoxFit.fill,
+                    child: Column(
+                      children: [
+                        CarouselSlider(
+                          items: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset(
+                                    cliniciImagini[index].imagePath,
+                                    height: 210,
+                                    width: 250,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      cliniciImagini[index].clinicName,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 22,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row (
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children:[
-                                      Text(
-                                        cliniciImagini[index].clinicName,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 22,
-                                        ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      cliniciImagini[index].nume!,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 20,
                                       ),
-                                    ],
-                                  ),
-                                  Row (
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children:[
-                                      Text(cliniciImagini[index].nume!,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ],
-                                  ),    
-                                ],
-                              ),
-                              for(int x = 0; x < cliniciImagini[index].imagesList.length; x++)...[
-                                /*
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            for (int x = 0; x < cliniciImagini[index].imagesList.length; x++) ...[
+                              /*
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Image.asset(
@@ -139,37 +140,36 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
                                   ),
                                 ),
                                 */
-                                Container(
-                                    margin: const EdgeInsets.all(5),
-                                    height: 210.0,
-                                    width: 250.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10), 
-                                      //set border radius to 50% of square height and width
-                                      image: DecorationImage(
-                                        image: 
-                                        AssetImage(
-                                          cliniciImagini[index].imagesList[x],
-                                        ),
-                                        fit: BoxFit.cover, //change image fill type
-                                      ),
+                              Container(
+                                margin: const EdgeInsets.all(5),
+                                height: 210.0,
+                                width: 250.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  //set border radius to 50% of square height and width
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      cliniciImagini[index].imagesList[x],
                                     ),
+                                    fit: BoxFit.cover, //change image fill type
                                   ),
-                              ],
+                                ),
+                              ),
                             ],
-                            options: CarouselOptions(
-                              height: 340.0,
-                              enlargeCenterPage: true,
-                              //autoPlay: true, //old
-                              autoPlay: false,
-                              aspectRatio: 16 / 9,
-                              autoPlayCurve: Curves.fastOutSlowIn,
-                              enableInfiniteScroll: true,
-                              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                              //viewportFraction: 0.8,
-                              viewportFraction: 1.0,
-                            ),
+                          ],
+                          options: CarouselOptions(
+                            height: 340.0,
+                            enlargeCenterPage: true,
+                            //autoPlay: true, //old
+                            autoPlay: false,
+                            aspectRatio: 16 / 9,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: true,
+                            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                            //viewportFraction: 0.8,
+                            viewportFraction: 1.0,
                           ),
+                        ),
                         /*
                         const SizedBox(height: 25),  
                         ClipRRect(
@@ -194,7 +194,7 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
                               fontWeight: FontWeight.w300,
                               fontSize: 20,
                             )),
-                        */    
+                        */
                       ],
                     ),
                   ),
@@ -216,9 +216,7 @@ class ClinicsGlisareImaginiScreen extends StatelessWidget {
   }
 }
 
-
 List<String> listaImaginiClinicaBrasov = [
-  
   './assets/images/clinics/ext1brasov_mica.jpg',
   './assets/images/clinics/ext2brasov_mica.jpg',
   './assets/images/clinics/int1brasov_mica.jpg',
@@ -237,11 +235,9 @@ List<String> listaImaginiClinicaBrasov = [
   './assets/images/clinics/int14brasov_mica.jpg',
   './assets/images/clinics/int15brasov_mica.jpg',
   './assets/images/clinics/int16brasov_mica.jpg',
-
 ];
 
 List<String> listaImaginiClinicaBuzau = [
-  
   './assets/images/clinics/ext1buzau_mica.jpg',
   './assets/images/clinics/ext2buzau_mica.jpg',
   './assets/images/clinics/int1buzau_mica.jpg',
@@ -250,12 +246,9 @@ List<String> listaImaginiClinicaBuzau = [
   './assets/images/clinics/int4buzau_mica.jpg',
   './assets/images/clinics/int5buzau_mica.jpg',
   './assets/images/clinics/int6buzau_mica.jpg',
-
 ];
 
-
 List<String> listaImaginiClinicaGalati = [
-
   './assets/images/clinics/ext1galati_mica.jpg',
   './assets/images/clinics/ext2galati_mica.jpg',
   './assets/images/clinics/int1galati_mica.jpg',
@@ -269,12 +262,9 @@ List<String> listaImaginiClinicaGalati = [
   './assets/images/clinics/int9galati_mica.jpg',
   './assets/images/clinics/int10galati_mica.jpg',
   './assets/images/clinics/int11galati_mica.jpg',
-
 ];
 
-
 List<String> listaImaginiClinicaTulcea = [
-
   './assets/images/clinics/ext1tulcea_mica.jpg',
   './assets/images/clinics/ext2tulcea_mica.jpg',
   './assets/images/clinics/int1tulcea_mica.jpg',
@@ -288,5 +278,4 @@ List<String> listaImaginiClinicaTulcea = [
   './assets/images/clinics/int9tulcea_mica.jpg',
   './assets/images/clinics/int10tulcea_mica.jpg',
   './assets/images/clinics/int11tulcea_mica.jpg',
-
 ];

@@ -1,9 +1,10 @@
-import 'dart:math';
-
 import 'package:another_flushbar/flushbar.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:unident_app/home.dart';
 import 'package:unident_app/home_screen.dart';
+import 'package:unident_app/password_reset.dart';
+import 'package:unident_app/register.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
 import 'package:unident_app/utils/api_firebase.dart';
 import 'package:unident_app/utils/classes.dart';
@@ -144,13 +145,42 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 child: const Center(
                   child: Text(
-                    'Inregistreaza-ma',
+                    'Intra in cont',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.white),
                   ),
                 ),
               ),
             ),
-          )
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    text: 'Nu ai deja un cont? ',
+                    style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RegisterScreen()));
+                      },
+                  ),
+                ),
+                RichText(
+                  text: TextSpan(
+                    text: 'Ai uitat parola? ',
+                    style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PasswordReset()));
+                      },
+                  ),
+                ),
+              ],
+            ),
+          ),
         ]),
       ),
     ));

@@ -137,17 +137,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          print(Shared.medici[index].profesii);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DoctorDetailsScreen(
-                                        miniCV: Shared.medici[index].miniCv,
-                                        jobs: Shared.medici[index].profesii,
-                                        id: Shared.medici[index].id,
-                                        nume: Shared.medici[index].nume,
-                                        poza: Shared.medici[index].poza,
-                                      )));
+                          apiCallFunctions.getDetaliiDoctor(pIdMedic: Shared.medici[index].id).then((value) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DoctorDetailsScreen(
+                                          detaliiDoctor: value!,
+                                          judet: Shared.mediciFiltrati[index].judet,
+                                          miniCV: Shared.medici[index].miniCv,
+                                          jobs: Shared.medici[index].profesii,
+                                          id: Shared.medici[index].id,
+                                          nume: Shared.medici[index].nume,
+                                          poza: Shared.medici[index].poza,
+                                        )));
+                          });
                         },
                         child: homeScreen_echipaNoastraDoctorWidget(
                           poza: Shared.medici[index].poza,
@@ -225,16 +228,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DoctorDetailsScreen(
-                                        miniCV: Shared.medici[index].miniCv,
-                                        jobs: Shared.medici[index].profesii,
-                                        nume: Shared.medici[index].nume,
-                                        id: Shared.medici[index].id,
-                                        poza: Shared.medici[index].poza,
-                                      )));
+                          apiCallFunctions.getDetaliiDoctor(pIdMedic: Shared.medici[index].id).then((value) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DoctorDetailsScreen(
+                                          detaliiDoctor: value!,
+                                          judet: Shared.mediciFiltrati[index].judet,
+                                          miniCV: Shared.medici[index].miniCv,
+                                          jobs: Shared.medici[index].profesii,
+                                          id: Shared.medici[index].id,
+                                          nume: Shared.medici[index].nume,
+                                          poza: Shared.medici[index].poza,
+                                        )));
+                          });
                         },
                         child: Container(
                           padding: const EdgeInsets.all(10),
@@ -318,6 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: Shared.mediciFiltrati.length),
               ),
             ),
+            const SizedBox(height: 33),
           ],
         ),
       ),

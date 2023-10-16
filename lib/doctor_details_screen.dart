@@ -1,17 +1,26 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:unident_app/solicita_programare_doctor.dart';
+import 'package:unident_app/utils/classes.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
+  final String judet;
+  final DetaliiDoctor detaliiDoctor;
   final String miniCV;
   final List<String> jobs;
   final Uint8List poza;
   final String nume;
   final String id;
   const DoctorDetailsScreen(
-      {super.key, required this.poza, required this.nume, required this.id, required this.jobs, required this.miniCV});
+      {super.key,
+      required this.judet,
+      required this.detaliiDoctor,
+      required this.poza,
+      required this.nume,
+      required this.id,
+      required this.jobs,
+      required this.miniCV});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +68,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Galati',
+                      Text(judet,
                           maxLines: 3,
                           style: TextStyle(
                               fontSize: 16,
@@ -136,22 +145,22 @@ class DoctorDetailsScreen extends StatelessWidget {
                           children: [
                             const Text('Pacienti', style: TextStyle(color: Colors.black)),
                             const SizedBox(height: 5),
-                            const Text('1.6K',
-                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))
+                            Text(detaliiDoctor.nrPacienti,
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))
                           ],
                         ),
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.25,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           children: [
                             const Text('Experienta', style: TextStyle(color: Colors.black)),
                             const SizedBox(height: 5),
-                            const Text('5 ani',
-                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))
+                            Text(detaliiDoctor.experienta,
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))
                           ],
                         ),
                       ),
@@ -164,7 +173,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                           children: [
                             const Text('Review', style: TextStyle(color: Colors.black)),
                             const SizedBox(height: 5),
-                            const Text('800',
+                            Text(detaliiDoctor.nrReviewuri,
                                 style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))
                           ],
                         ),
@@ -185,6 +194,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SolicitaProgramareDoctorScreen(
+                                        judet: judet,
                                         nume: nume,
                                         poza: poza,
                                         id: id,

@@ -333,18 +333,18 @@ class ApiCallFunctions {
 
 //TODO verif
         Programare p = Programare(
-          nume: '',
-          prenume: '',
-          idPacient: '',
-          medic: l[2],
-          categorie: l[3],
-          status: l[4],
-          anulata: l[5],
-          inceput: date,
-          sfarsit: dateSf,
-          id: l[6],
-          hasFeedback: l[7],
-        );
+            nume: '',
+            prenume: '',
+            idPacient: '',
+            medic: l[2],
+            categorie: l[3],
+            status: l[4],
+            anulata: l[5],
+            inceput: date,
+            sfarsit: dateSf,
+            id: l[6],
+            hasFeedback: l[7],
+            idMedic: l[8]);
         programariViitoare.add(p);
       }
 
@@ -377,7 +377,8 @@ class ApiCallFunctions {
             anulata: l[5],
             inceput: date,
             sfarsit: dateSf,
-            hasFeedback: l[7]);
+            hasFeedback: l[7],
+            idMedic: l[8]);
         programariTrecute.add(p);
       }
     }
@@ -620,6 +621,44 @@ class ApiCallFunctions {
     String? data = await apiCall.apeleazaMetodaString(pNumeMetoda: 'AdaugaProgramareV2', pParametrii: param);
 
     return data;
+  }
+
+  Future<String?> adaugaFeedbackPeMedic({
+    required String pIdProgramare,
+    required String nota,
+    required String pIdMedic,
+    String? pObservatii,
+  }) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final Map<String, String> param = {
+      'pAdresaMail': prefs.getString(pref_keys.userEmail)!,
+      'pParolaMD5': prefs.getString(pref_keys.userPassMD5)!,
+      'pIdMedic': pIdMedic,
+      'pIdProgramare': pIdProgramare,
+      'pObservatii': pObservatii ?? "",
+      'pNota': nota,
+    };
+    String? data = await apiCall.apeleazaMetodaString(pNumeMetoda: 'AdaugaFeedbackPeMedic', pParametrii: param);
+    return data;
+  }
+
+  Future<DetaliiDoctor?> getDetaliiDoctor({
+    required String pIdMedic,
+  }) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final Map<String, String> param = {
+      'pAdresaEmail': prefs.getString(pref_keys.userEmail)!,
+      'pParolaMD5': prefs.getString(pref_keys.userPassMD5)!,
+      'pIdMedic': pIdMedic,
+    };
+    String? data = await apiCall.apeleazaMetodaString(pNumeMetoda: 'GetDetaliiMedic', pParametrii: param);
+    List<String> listaDetalii = data!.split('\$#\$');
+    DetaliiDoctor detaliiDoctor = DetaliiDoctor(
+        nrReviewuri: listaDetalii[0],
+        nrPacienti: listaDetalii[2],
+        experienta: listaDetalii[3],
+        notaMedieReview: listaDetalii[1]);
+    return detaliiDoctor;
   }
 
   Future<List<MembruFamilie>> getListaFamilie() async {

@@ -164,7 +164,8 @@ class DetaliiProgramare {
 }
 
 class Programare {
-  final String hasFeedback;
+  final String idMedic;
+  String hasFeedback;
   final String id;
   final DateTime inceput, sfarsit;
   final String medic, categorie;
@@ -175,7 +176,8 @@ class Programare {
   static const String statusAnulat = "Anulat";
 
   Programare(
-      {required this.hasFeedback,
+      {required this.idMedic,
+      required this.hasFeedback,
       required this.id,
       required this.medic,
       required this.anulata,
@@ -217,6 +219,16 @@ class LinieFisaTratament {
       this.dataCreareDateTime,
       this.dataCreareString,
       required this.valoareInitiala});
+}
+
+class DetaliiDoctor {
+  final String nrReviewuri;
+  final String nrPacienti;
+  final String experienta;
+  final String notaMedieReview;
+
+  DetaliiDoctor(
+      {required this.nrReviewuri, required this.nrPacienti, required this.experienta, required this.notaMedieReview});
 }
 
 class Programari {

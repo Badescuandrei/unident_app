@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:unident_app/login.dart';
 
 class TermsAndConditionsScreen extends StatefulWidget {
   const TermsAndConditionsScreen({super.key});
@@ -34,7 +35,7 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
               height: 15,
             ),
             Container(
-              height: height * 0.71,
+              height: height * 0.61,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
@@ -49,7 +50,7 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                   )),
                   const SizedBox(height: 10),
                   Container(
-                    height: height * 0.57,
+                    height: height * 0.47,
                     child: const PrivacyDialog(mdFileName: "terms_and_conditions.md"),
                   ),
                   Row(
@@ -60,6 +61,7 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                         onChanged: (value) {
                           setState(() {
                             valueCheck = value!;
+                            print(valueCheck);
                           });
                         },
                       ),
@@ -73,17 +75,26 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(255, 210, 153, 47),
+            GestureDetector(
+              onTap: valueCheck
+                  ? () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return const LoginScreen();
+                      }));
+                    }
+                  : null,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: valueCheck ? Color.fromARGB(255, 210, 153, 47) : Colors.grey,
+                ),
+                height: height * 0.08,
+                child: Center(
+                    child: Text(
+                  'INAINTE',
+                  style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w500),
+                )),
               ),
-              height: height * 0.08,
-              child: const Center(
-                  child: Text(
-                'INAINTE',
-                style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w500),
-              )),
             )
           ],
         ),

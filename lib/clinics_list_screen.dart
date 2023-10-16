@@ -57,7 +57,7 @@ class ClinicsScreen extends StatelessWidget {
           title: const Text('Clinicile Unident', style: TextStyle(fontSize: 32)),
           backgroundColor: Colors.purple[900],
           centerTitle: true),
-      backgroundColor: Colors.grey[400],
+      backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Align(

@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:unident_app/home.dart';
+// import 'package:unident_app/home.dart';
 // import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:unident_app/horizontal_week_calendar.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
@@ -24,10 +24,13 @@ Map<String, Duration> orarProgramari = {
 ApiCallFunctions apiCallFunctions = ApiCallFunctions();
 
 class SolicitaProgramareDoctorScreen extends StatefulWidget {
+  // eu aici ii dau judet, dar pot sa fac asta doar din doctorii cu intervalul de timp selectat
+  final String? judet;
   final Uint8List poza;
   final String nume;
   final String id;
-  const SolicitaProgramareDoctorScreen({super.key, required this.poza, required this.nume, required this.id});
+  const SolicitaProgramareDoctorScreen(
+      {super.key, required this.poza, required this.nume, required this.id, this.judet});
 
   @override
   State<SolicitaProgramareDoctorScreen> createState() => _SolicitaProgramareDoctorScreenState();
@@ -57,16 +60,16 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
           backgroundColor: Colors.purple[900],
           centerTitle: true),
       body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 width: MediaQuery.of(context).size.width * 0.95,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
                 child: Row(
@@ -79,7 +82,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                         radius: 50,
                       )
                     ]),
-                    Column(
+                    const Column(
                       children: [
                         SizedBox(
                           width: 20,
@@ -90,20 +93,19 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 15,
-                        ),
+                        const SizedBox(height: 15),
                         Text(widget.nume,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black)), // TO-DO : get doctor name from api')
                         Row(
                           // mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.location_history),
-                            Text('Galati',
-                                style: TextStyle(
+                            const Icon(Icons.location_pin, color: Colors.black38, size: 20),
+                            SizedBox(width: 5),
+                            Text(widget.judet ?? "Tulcea",
+                                style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black)) // TO-DO : get doctor location from api'
