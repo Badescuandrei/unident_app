@@ -5,6 +5,7 @@ import 'package:unident_app/solicita_programare_doctor.dart';
 import 'package:unident_app/utils/classes.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
+  final String numeDoctor;
   final String judet;
   final DetaliiDoctor detaliiDoctor;
   final String miniCV;
@@ -20,7 +21,8 @@ class DoctorDetailsScreen extends StatelessWidget {
       required this.nume,
       required this.id,
       required this.jobs,
-      required this.miniCV});
+      required this.miniCV,
+      required this.numeDoctor});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class DoctorDetailsScreen extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back_ios_new),
           ),
-          title: const Text('Doctor', style: TextStyle(fontSize: 20)),
+          title: Text(numeDoctor, style: const TextStyle(fontSize: 20)),
           backgroundColor: const Color.fromARGB(255, 46, 31, 112),
           centerTitle: true),
       backgroundColor: const Color.fromARGB(255, 46, 31, 112),

@@ -30,7 +30,7 @@ class _PasswordResetPinState extends State<PasswordResetPin> {
       backgroundColor: const Color.fromARGB(255, 236, 236, 236),
       body: SafeArea(
           child: SingleChildScrollView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,

@@ -142,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DoctorDetailsScreen(
+                                          numeDoctor: Shared.medici[index].nume,
                                           detaliiDoctor: value!,
                                           judet: Shared.mediciFiltrati[index].judet,
                                           miniCV: Shared.medici[index].miniCv,
@@ -233,6 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DoctorDetailsScreen(
+                                          numeDoctor: Shared.medici[index].nume,
                                           detaliiDoctor: value!,
                                           judet: Shared.mediciFiltrati[index].judet,
                                           miniCV: Shared.medici[index].miniCv,
