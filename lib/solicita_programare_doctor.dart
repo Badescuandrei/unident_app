@@ -53,11 +53,11 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
             icon: const Icon(Icons.arrow_back_ios_new),
           ),
           title: const Text(
-            'Solitica o programare',
+            'Solicită o programare',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 24),
           ),
-          backgroundColor: Colors.purple[900],
+          backgroundColor: Color.fromRGBO(57, 52, 118, 1),
           centerTitle: true),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -127,7 +127,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                 children: [
                   HorizontalWeekCalendar(
                     weekStartFrom: WeekStartFrom.Monday,
-                    activeBackgroundColor: const Color.fromARGB(255, 46, 4, 171),
+                    activeBackgroundColor: const Color.fromRGBO(57, 52, 118, 1),
                     activeTextColor: Colors.white,
                     inactiveBackgroundColor: Colors.white,
                     inactiveTextColor: Colors.black,
@@ -249,13 +249,13 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 46, 4, 171),
+                    color: const Color.fromRGBO(57, 52, 118, 1),
                   ),
                   height: 50,
                   width: 200,
                   child: const Center(
                     child: Text(
-                      'Programeaza-ma',
+                      'Programează-mă',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
                     ),

@@ -43,23 +43,26 @@ class _RedirectPromotiiLunareState extends State<RedirectPromotiiLunare> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            ZoomDrawer.of(context)!.toggle();
-          },
-          icon: const Icon(Icons.menu),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              ZoomDrawer.of(context)!.toggle();
+            },
+            icon: const Icon(Icons.menu),
+          ),
+          title: const Text('PROMOTII LUNARE'),
+          centerTitle: true,
+          backgroundColor: Color.fromRGBO(57, 52, 118, 1),
         ),
-        title: const Text('PROMOTII LUNARE'),
-        centerTitle: true,
-        backgroundColor: Colors.purple[900],
-      ),
-      body: SizedBox(
-        child: WebViewWidget(
-          key: _key,
-          controller: controller,
-          gestureRecognizers: gestureRecognizers,
+        body: SizedBox(
+          child: WebViewWidget(
+            key: _key,
+            controller: controller,
+            gestureRecognizers: gestureRecognizers,
+          ),
         ),
       ),
     );

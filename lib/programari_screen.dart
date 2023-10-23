@@ -51,41 +51,44 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              ZoomDrawer.of(context)!.toggle();
-            },
-            icon: const Icon(Icons.menu),
-          ),
-          title: const Text('Programari', style: TextStyle(fontSize: 20)),
-          backgroundColor: Colors.purple[900],
-          centerTitle: true),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 25),
-              Center(
-                child: mainToggleTab(context),
-              ),
-              const SizedBox(height: 15),
-              programariToggle ? listaProgramariUser(context) : listaProgramariCopil(context)
-              // currentIndex == 0
-              //     ? butoaneDeApasat(context)
-              //     : currentIndex == 1
-              //         ? detaliiProgramareWidget()
-              //         : Image.asset(
-              //             './assets/images/unident-alb.png',
-              //             height: 35,
-              //             color: Colors.red,
-              //           ),
-            ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: Colors.grey[300],
+        appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                ZoomDrawer.of(context)!.toggle();
+              },
+              icon: const Icon(Icons.menu),
+            ),
+            title: const Text('PROGRAMĂRI', style: TextStyle(fontSize: 20)),
+            backgroundColor: Color.fromRGBO(57, 52, 118, 1),
+            centerTitle: true),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 25),
+                Center(
+                  child: mainToggleTab(context),
+                ),
+                const SizedBox(height: 15),
+                programariToggle ? listaProgramariUser(context) : listaProgramariCopil(context)
+                // currentIndex == 0
+                //     ? butoaneDeApasat(context)
+                //     : currentIndex == 1
+                //         ? detaliiProgramareWidget()
+                //         : Image.asset(
+                //             './assets/images/unident-alb.png',
+                //             height: 35,
+                //             color: Colors.red,
+                //           ),
+              ],
+            ),
           ),
         ),
       ),
@@ -161,12 +164,12 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
       callback: (int index) {
         setState(() {
           programariToggle = !programariToggle;
-          currentIndexprogramariToggle = index;
+          // currentIndexprogramariToggle = index;
         });
       },
       tabTexts: const [
-        'Programarile dvs.',
-        'Programarile copilului',
+        'Programările dvs',
+        'Programprile copilului',
       ],
       height: 45,
       width: MediaQuery.of(context).size.width * 0.9,
@@ -215,12 +218,12 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
       callback: (int index) {
         setState(() {
           programarileTaleToggle = !programarileTaleToggle;
-          currentIndexprogramarileTaleToggle = index;
+          // currentIndexprogramarileTaleToggle = index;
         });
       },
       tabTexts: const [
-        'Programari trecute.',
-        'Programarile viitoare',
+        'Programări trecute',
+        'Programări viitoare',
       ],
       height: 45,
       width: MediaQuery.of(context).size.width * 0.6,
@@ -269,12 +272,12 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
       callback: (int index) {
         setState(() {
           programariCopilToggle = !programariCopilToggle;
-          currentIndexprogramariCopilToggle = index;
+          // currentIndexprogramariCopilToggle = index;
         });
       },
       tabTexts: const [
-        'Programari trecute.',
-        'Programarile viitoare',
+        'Programari trecute',
+        'Programari viitoare',
       ],
       height: 45,
       width: MediaQuery.of(context).size.width * 0.6,
@@ -312,42 +315,6 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
         fontSize: 12,
         color: Colors.black,
         fontWeight: FontWeight.w400,
-      ),
-    );
-  }
-
-  Container butoaneDeApasat(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: const Color.fromARGB(255, 57, 14, 143),
-      ),
-      height: 300,
-      width: MediaQuery.of(context).size.width * 0.95,
-      child: Align(
-        alignment: Alignment.center,
-        child: ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 50,
-                child: const Center(
-                  child: Text('Descarca planul de tratament', style: TextStyle(color: Colors.black, fontSize: 22)),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 15,
-              );
-            },
-            itemCount: 4),
       ),
     );
   }

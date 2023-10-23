@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:unident_app/clinics_glisare_imagini_screen.dart';
+import 'package:unident_app/clinics_info_screen.dart';
+import 'package:unident_app/documents_list_screen.dart';
 import 'package:unident_app/programari_screen.dart';
 // import 'package:unident_app/feedback_screen.dart';
 // import 'package:unident_app/glisare_imagini_screen_IGV_only.dart';
@@ -10,7 +11,7 @@ import 'package:unident_app/redirect_promotii_lunare.dart';
 import 'package:unident_app/redirect_turism_screen.dart';
 import 'package:unident_app/solicita_programare.dart';
 // import 'package:unident_app/terms_and_conditions_screen.dart';
-import 'package:unident_app/clinics_list_screen.dart';
+import 'package:unident_app/contact_screen.dart';
 // import 'package:unident_app/doctor_details_screen.dart';
 import 'package:unident_app/home_screen.dart';
 // import 'package:unident_app/login.dart';
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
         currentIndexNavBar = 3;
       } else if (index == 10) {
         currentIndexNavBar = 1;
-      } else if (index > 3) {
+      } else if (index >= 3) {
         currentIndexNavBar = -1;
       } else if (index == 0) {
         currentIndexNavBar = 0;
@@ -65,7 +66,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       // key: scaffoldKey,
       bottomNavigationBar: SalomonBottomBar(
-        selectedItemColor: const Color.fromARGB(255, 13, 19, 130),
+        selectedItemColor: const Color.fromRGBO(57, 52, 118, 1),
         currentIndex: currentIndexNavBar,
         onTap: (i) {
           if (i == 1) {
@@ -111,7 +112,7 @@ class _HomeState extends State<Home> {
         borderRadius: 30,
         showShadow: true,
         angle: 0.0,
-        menuBackgroundColor: Colors.deepPurple,
+        menuBackgroundColor: Color.fromRGBO(57, 52, 118, 1),
         menuScreenTapClose: true,
         duration: const Duration(milliseconds: 700),
       ),
@@ -160,7 +161,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Color.fromRGBO(57, 52, 118, 1),
       body: Stack(
         children: [
           Column(

@@ -25,13 +25,11 @@ class TratamenteItem extends StatelessWidget {
             children: [
               Text(
                 DateFormat('yMd', 'ro').format(data),
-                style:
-                    const TextStyle(color: Color.fromARGB(255, 98, 20, 207), fontSize: 15, fontWeight: FontWeight.bold),
+                style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
               ),
               Text(
                 doctor,
-                style:
-                    const TextStyle(color: Color.fromARGB(255, 98, 20, 207), fontSize: 15, fontWeight: FontWeight.bold),
+                style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ],
           ),

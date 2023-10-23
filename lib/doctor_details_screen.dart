@@ -31,7 +31,7 @@ class DoctorDetailsScreen extends StatelessWidget {
         MediaQuery.of(context).padding.bottom -
         kToolbarHeight;
     var sizedboxHeight = realHeight * 0.025;
-    var sizedboxDoctorRowHeight = realHeight * 0.5;
+    // var sizedboxDoctorRowHeight = realHeight * 0.5;
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
@@ -42,9 +42,9 @@ class DoctorDetailsScreen extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_ios_new),
           ),
           title: Text(numeDoctor, style: const TextStyle(fontSize: 20)),
-          backgroundColor: const Color.fromARGB(255, 46, 31, 112),
+          backgroundColor: const Color.fromRGBO(57, 52, 118, 1),
           centerTitle: true),
-      backgroundColor: const Color.fromARGB(255, 46, 31, 112),
+      backgroundColor: const Color.fromRGBO(57, 52, 118, 1),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Column(
@@ -138,22 +138,22 @@ class DoctorDetailsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Container(
+                      //   width: MediaQuery.of(context).size.width * 0.25,
+                      //   padding: EdgeInsets.all(10),
+                      //   decoration: BoxDecoration(
+                      //       border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(10)),
+                      //   child: Column(
+                      //     children: [
+                      //       const Text('Pacienti', style: TextStyle(color: Colors.black)),
+                      //       const SizedBox(height: 5),
+                      //       Text(detaliiDoctor.nrPacienti,
+                      //           style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))
+                      //     ],
+                      //   ),
+                      // ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.25,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(10)),
-                        child: Column(
-                          children: [
-                            const Text('Pacienti', style: TextStyle(color: Colors.black)),
-                            const SizedBox(height: 5),
-                            Text(detaliiDoctor.nrPacienti,
-                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.25,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(10)),
@@ -167,13 +167,13 @@ class DoctorDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.25,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           children: [
-                            const Text('Review', style: TextStyle(color: Colors.black)),
+                            const Text('Reviews', style: TextStyle(color: Colors.black)),
                             const SizedBox(height: 5),
                             Text(detaliiDoctor.nrReviewuri,
                                 style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))
@@ -188,7 +188,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
-                        color: const Color.fromARGB(255, 108, 93, 176),
+                        color: const Color.fromRGBO(57, 52, 118, 1),
                       ),
                       child: TextButton(
                         onPressed: () {

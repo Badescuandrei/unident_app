@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:unident_app/doctor_details_screen.dart';
 import 'package:unident_app/home.dart';
@@ -21,13 +22,13 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = -1;
 
   loadData() async {
-    List<Medic>? meds = await apiCallFunctions.getListaMedici();
+    // List<Medic>? meds = await apiCallFunctions.getListaMedici();
     List<MedicSlotLiber>? medsFiltrati = await apiCallFunctions.getListaMediciSlotLiber();
-    Shared.medici.clear();
+    // Shared.medici.clear();
     Shared.mediciFiltrati.clear();
-    if (meds != null) {
-      Shared.medici.addAll(meds);
-    }
+    // if (meds != null) {
+    //   Shared.medici.addAll(meds);
+    // }
     if (medsFiltrati != null) {
       Shared.mediciFiltrati.addAll(medsFiltrati);
     }
@@ -49,46 +50,49 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    super.initState();
     loadData2();
     loadData();
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // bottomNavigationBar: SalomonBottomBar(
-      //   selectedItemColor: const Color.fromARGB(255, 13, 19, 130),
-      //   currentIndex: _currentIndex,
-      //   onTap: (i) => setState(() => _currentIndex = i),
-      //   items: [
-      //     /// Home
-      //     SalomonBottomBarItem(
-      //       icon: const ImageIcon(AssetImage('./assets/images/navbar/icons8-home-55.png')),
-      //       title: const Text("Acasa"),
-      //     ),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        // bottomNavigationBar: SalomonBottomBar(
+        //   selectedItemColor: const Color.fromARGB(255, 13, 19, 130),
+        //   currentIndex: _currentIndex,
+        //   onTap: (i) => setState(() => _currentIndex = i),
+        //   items: [
+        //     /// Home
+        //     SalomonBottomBarItem(
+        //       icon: const ImageIcon(AssetImage('./assets/images/navbar/icons8-home-55.png')),
+        //       title: const Text("Acasa"),
+        //     ),
 
-      //     /// Likes
-      //     SalomonBottomBarItem(
-      //       icon: const ImageIcon(AssetImage('./assets/images/navbar/calendar.png')),
-      //       title: const Text("Programari"),
-      //     ),
+        //     /// Likes
+        //     SalomonBottomBarItem(
+        //       icon: const ImageIcon(AssetImage('./assets/images/navbar/calendar.png')),
+        //       title: const Text("Programari"),
+        //     ),
 
-      //     /// Search
-      //     SalomonBottomBarItem(
-      //       icon: const ImageIcon(AssetImage('./assets/images/navbar/dinte.png')),
-      //       title: const Text("Tratamente"),
-      //     ),
+        //     /// Search
+        //     SalomonBottomBarItem(
+        //       icon: const ImageIcon(AssetImage('./assets/images/navbar/dinte.png')),
+        //       title: const Text("Tratamente"),
+        //     ),
 
-      //     /// Profile
-      //     SalomonBottomBarItem(
-      //       icon: const ImageIcon(AssetImage('./assets/images/navbar/pagina perosnala.png')),
-      //       title: const Text("Profil"),
-      //     ),
-      //   ],
-      // ),
-      backgroundColor: const Color.fromARGB(255, 240, 237, 237),
-      body: newMethod(),
+        //     /// Profile
+        //     SalomonBottomBarItem(
+        //       icon: const ImageIcon(AssetImage('./assets/images/navbar/pagina perosnala.png')),
+        //       title: const Text("Profil"),
+        //     ),
+        //   ],
+        // ),
+        backgroundColor: const Color.fromARGB(255, 240, 237, 237),
+        body: newMethod(),
+      ),
     );
   }
 
@@ -105,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const DrawerWidget(),
-                  const Text('Acasa', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Acasă', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   Image.asset('./assets/images/logo sus dreapta.png', width: 40, height: 40)
                 ],
               ),
@@ -118,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child:
-                  Row(children: [Text('Echipa noastra', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600))]),
+                  Row(children: [Text('Echipa noastră', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600))]),
             ),
             const SizedBox(height: 10),
             Padding(
@@ -249,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: const Color.fromARGB(255, 93, 83, 172),
+                            color: const Color.fromRGBO(57, 52, 118, 1),
                           ),
                           width: MediaQuery.of(context).size.width * 0.75,
                           child: Row(
