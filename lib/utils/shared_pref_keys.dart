@@ -1,7 +1,7 @@
 const String preferredLanguage = 'preferredLanguage';
-const String firstTime = 'true';
+const String firstTime = 'firstTime';
 const String urlServiciu = 'urlServiciu';
-const String loggedIn = 'false';
+const String loggedIn = 'loggedIn';
 const String termeniSiConditii = 'termeniSiConditii';
 const String userPassMD5 = 'userPassMD5';
 const String userIdInregistrare = 'userIdInregistrare';
