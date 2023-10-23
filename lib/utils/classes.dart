@@ -44,6 +44,7 @@ class Sediu {
 }
 
 class Medic {
+  final String judet;
   final List<String> profesii;
   final String id;
   final String nume;
@@ -56,6 +57,7 @@ class Medic {
 
   Medic({
     required this.profesii,
+    required this.judet,
     required this.id,
     required this.nume,
     required this.poza,
@@ -188,6 +190,13 @@ class Programare {
       required this.idPacient,
       required this.nume,
       required this.prenume});
+}
+
+class FetchedDocument {
+  final String nume;
+  final String id;
+
+  FetchedDocument({required this.nume, required this.id});
 }
 
 class LinieFisaTratament {
