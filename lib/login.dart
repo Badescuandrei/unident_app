@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:unident_app/home.dart';
 import 'package:unident_app/home_screen.dart';
+import 'package:unident_app/loading_screen.dart';
 import 'package:unident_app/password_reset.dart';
 import 'package:unident_app/register.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
@@ -278,9 +279,8 @@ class _LoginScreenState extends State<LoginScreen> {
       Future.delayed(const Duration(seconds: 2), () {
         saveTokenToDB(Shared.FCMtoken);
         Navigator.of(context)
-            .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const Home()), (route) => false);
+            .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const LoadingScreen()), (route) => false);
       });
     }
-    return;
   }
 }
