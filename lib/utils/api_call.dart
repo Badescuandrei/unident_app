@@ -76,7 +76,7 @@ class ApiCall {
 
     try {
       data = XmlDocument.parse(response.body).findAllElements('${pNumeMetoda}Result').first.firstChild.toString();
-      print(data);
+      // print(data);
     } catch (e) {
       // print('EROARE XML - ' + pNumeMetoda);
       // print(response.body);

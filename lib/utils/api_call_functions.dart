@@ -124,6 +124,7 @@ class ApiCallFunctions {
         List<String> cats = list[5].split(',');
         List<String> sedii = list[6].split(',');
         List<String> profesii = list[7].split(',');
+        String judet = list[8];
 
         List<int> ints = <int>[];
 
@@ -132,6 +133,7 @@ class ApiCallFunctions {
         }
 
         medici.add(Medic(
+            judet: judet,
             profesii: profesii,
             id: list[0],
             nume: list[1],
@@ -162,6 +164,11 @@ class ApiCallFunctions {
       return null;
     }
     if (data.contains('*\$*')) {
+      String denumireSediu = '';
+      String idCabinet = '';
+      String idSediu = '';
+      String judet = '';
+      String localitate = '';
       List<String> rawList = data.split('*\$*');
       rawList.removeWhere((element) => element.isEmpty);
 
@@ -180,21 +187,16 @@ class ApiCallFunctions {
           profesii = list[7].split(',');
           print(profesii);
         }
-        String denumireSediu = '';
-        String idCabinet = '';
-        String idSediu = '';
-        String judet = '';
-        String localitate = '';
 
-        DateTime dataPrimulSlotLiber = new DateTime(1, 1, 1);
+        DateTime dataPrimulSlotLiber = DateTime(1, 1, 1);
         print(list.length);
-        if (list.length > 8) {
-          dataPrimulSlotLiber = DateTime.utc(int.parse(list[8].substring(0, 4)), int.parse(list[8].substring(4, 6)),
-              int.parse(list[8].substring(6, 8)));
-          denumireSediu = list[9];
-          idCabinet = list[10];
-          idSediu = list[11];
-          judet = list[12];
+        if (list.length > 9) {
+          dataPrimulSlotLiber = DateTime.utc(int.parse(list[9].substring(0, 4)), int.parse(list[9].substring(4, 6)),
+              int.parse(list[9].substring(6, 8)));
+          denumireSediu = list[10];
+          idCabinet = list[11];
+          idSediu = list[12];
+          judet = list[8];
           localitate = list[13];
           // print(data);
           // print(list[7]);
@@ -463,12 +465,95 @@ class ApiCallFunctions {
     return interventii;
   }
 
+  Future<List<LinieFisaTratament>?> getListaLiniiFisaTratamentDeFacut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, String> params = {
+      'pAdresaMail': prefs.getString(pref_keys.userEmail)!,
+      'pParolaMD5': prefs.getString(pref_keys.userPassMD5)!,
+    };
+
+    String? res =
+        await apiCall.apeleazaMetodaString(pNumeMetoda: 'GetListaLiniiFisaTratamentDeFacut', pParametrii: params);
+
+    List<LinieFisaTratament> interventii = <LinieFisaTratament>[];
+    if (res == null) {
+      return null;
+    }
+    if (res.contains('*\$*')) {
+      List<String> interventiiRaw = res.split('*\$*');
+      interventiiRaw.removeWhere((v) => v.isEmpty);
+
+      for (var interv in interventiiRaw) {
+        List<String> list = interv.split('\$#\$');
+
+        DateTime dateTime = DateTime.utc(
+            int.parse(list[6].substring(0, 4)), int.parse(list[6].substring(4, 6)), int.parse(list[6].substring(6, 8)));
+
+        String data = DateFormat('dd.MM.yyyy').format(dateTime);
+
+        interventii.add(LinieFisaTratament(
+            tipObiect: list[0],
+            idObiect: list[1],
+            numeMedic: list[2],
+            denumireInterventie: list[3],
+            dinti: list[4],
+            observatii: list[5],
+            dataDateTime: dateTime,
+            dataString: data,
+            pret: list[7],
+            culoare: Color(int.parse(list[8])),
+            valoareInitiala: list[9]));
+      }
+    }
+    return interventii;
+  }
+
   Future<List<LinieFisaTratament>?> getListaLiniiFisaTratamentRealizateMembruFamilie(
       MembruFamilie membruFamilie) async {
     Map<String, String> params = {'pIdMembru': membruFamilie.id};
 
     String? res = await apiCall.apeleazaMetodaString(
         pNumeMetoda: 'GetListaLiniiFisaTratamentRealizatePeMembruFamilie', pParametrii: params);
+
+    List<LinieFisaTratament> interventii = <LinieFisaTratament>[];
+    if (res == null) {
+      return null;
+    }
+    if (res.contains('*\$*')) {
+      List<String> interventiiRaw = res.split('*\$*');
+      interventiiRaw.removeWhere((v) => v.isEmpty);
+
+      for (var interv in interventiiRaw) {
+        List<String> list = interv.split('\$#\$');
+
+        DateTime dateTime = DateTime.utc(
+            int.parse(list[6].substring(0, 4)), int.parse(list[6].substring(4, 6)), int.parse(list[6].substring(6, 8)));
+
+        String data = DateFormat('dd.MM.yyyy').format(dateTime);
+
+        interventii.add(LinieFisaTratament(
+            tipObiect: list[0],
+            idObiect: list[1],
+            numeMedic: list[2],
+            denumireInterventie: list[3],
+            dinti: list[4],
+            observatii: list[5],
+            dataDateTime: dateTime,
+            dataString: data,
+            pret: list[7],
+            culoare: Color(int.parse(list[8])),
+            valoareInitiala: list[9]));
+      }
+    }
+    return interventii;
+  }
+
+  Future<List<LinieFisaTratament>?> getListaLiniiFisaTratamentDeFacutPeMembruFamilie(
+      MembruFamilie membruFamilie) async {
+    Map<String, String> params = {'pIdMembru': membruFamilie.id};
+
+    String? res = await apiCall.apeleazaMetodaString(
+        pNumeMetoda: 'GetListaLiniiFisaTratamentDeFacutPeMembruFamilie', pParametrii: params);
 
     List<LinieFisaTratament> interventii = <LinieFisaTratament>[];
     if (res == null) {
@@ -654,11 +739,23 @@ class ApiCallFunctions {
     String? data = await apiCall.apeleazaMetodaString(pNumeMetoda: 'GetDetaliiMedic', pParametrii: param);
     List<String> listaDetalii = data!.split('\$#\$');
     DetaliiDoctor detaliiDoctor = DetaliiDoctor(
-        nrReviewuri: listaDetalii[0],
-        nrPacienti: listaDetalii[2],
-        experienta: listaDetalii[3],
-        notaMedieReview: listaDetalii[1]);
+      nrReviewuri: listaDetalii[0],
+      notaMedieReview: listaDetalii[1],
+      nrPacienti: listaDetalii[2],
+      experienta: listaDetalii[3],
+    );
     return detaliiDoctor;
+  }
+
+  Future<String> getSirBitiDocument(String pIdDocument) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final Map<String, String> param = {
+      'pAdresaMail': prefs.getString(pref_keys.userEmail)!,
+      'pParolaMD5': prefs.getString(pref_keys.userPassMD5)!,
+      'pIdDocument': pIdDocument,
+    };
+    String? data = await apiCall.apeleazaMetodaString(pNumeMetoda: 'GetSirBitiDocument', pParametrii: param);
+    return data!;
   }
 
   Future<List<MembruFamilie>> getListaFamilie() async {
@@ -685,5 +782,55 @@ class ApiCallFunctions {
     }
 
     return familie;
+  }
+
+  Future<List<FetchedDocument>?> getListaDocumente() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final Map<String, String> param = {
+      'pAdresaMail': prefs.getString(pref_keys.userEmail)!,
+      'pParolaMD5': prefs.getString(pref_keys.userPassMD5)!,
+    };
+    String? data = await apiCall.apeleazaMetodaString(pNumeMetoda: 'GetListaDocumente', pParametrii: param);
+    List<FetchedDocument> listaDocumenteFinala = [];
+    if (data == null) {
+      return null;
+    } else if (data.contains('*\$*')) {
+      List<String> listaDocumente = data.split('*\$*');
+      listaDocumente.removeWhere((element) => element.isEmpty);
+
+      for (var document in listaDocumente) {
+        List<String> listaDocument = document.split('\$#\$');
+        listaDocumenteFinala.add(FetchedDocument(
+          id: listaDocument[0],
+          nume: listaDocument[1],
+        ));
+      }
+    }
+    return listaDocumenteFinala;
+  }
+
+  Future<List<FetchedDocument>?> getListaDocumenteCopil() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final Map<String, String> param = {
+      'pIdMembru': Shared.familie[0].id,
+    };
+    String? data =
+        await apiCall.apeleazaMetodaString(pNumeMetoda: 'GetListaDocumentePeMembruFamilie', pParametrii: param);
+    List<FetchedDocument> listaDocumenteFinala = [];
+    if (data == null) {
+      return null;
+    } else if (data.contains('*\$*')) {
+      List<String> listaDocumente = data.split('*\$*');
+      listaDocumente.removeWhere((element) => element.isEmpty);
+
+      for (var document in listaDocumente) {
+        List<String> listaDocument = document.split('\$#\$');
+        listaDocumenteFinala.add(FetchedDocument(
+          id: listaDocument[0],
+          nume: listaDocument[1],
+        ));
+      }
+    }
+    return listaDocumenteFinala;
   }
 }
