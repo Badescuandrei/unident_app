@@ -5,9 +5,12 @@
 // as possible, maybe even using a Stream in order to constantly update it every 10 seconds or so would be a better approach, but for now
 // this is the closest to that without investing time to change the architecture
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unident_app/home.dart';
+import 'package:unident_app/login.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
 import 'package:unident_app/utils/classes.dart';
+import '../utils/shared_pref_keys.dart' as pref_keys;
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -22,6 +25,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     // (setPage);
     super.initState();
+    login(context);
     loadData();
   }
 
@@ -81,5 +85,31 @@ class _LoadingScreenState extends State<LoadingScreen> {
         ),
       ),
     );
+  }
+
+  login(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // final token = await FirebaseMessaging.instance.getToken() ?? '';
+
+    String? res = await apiCallFunctions.login(
+        pAdresaEmail: prefs.getString(pref_keys.userEmail)!,
+        pParolaMD5: prefs.getString(pref_keys.userPassMD5)!,
+        pFirebaseGoogleDeviceID:
+            prefs.getString(pref_keys.fcmToken) ?? "FCM Token not available in Shared Preferences");
+    print(res);
+    if (res == null) {
+      return;
+      // } else if (res.startsWith('161')) {
+      //   showsnackbar(
+      //     context,
+      //     "Date de login varule!",
+      //   );
+      // return;
+    } else if (res.startsWith('66')) {
+      Navigator.of(context)
+          .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
+    } else if (res.startsWith('264')) {
+      return;
+    } else if (res.contains('\$#\$')) {}
   }
 }

@@ -561,7 +561,9 @@ class _ClinicsGlisareImaginiScreenState extends State<ClinicsGlisareImaginiScree
                                     width: 13,
                                     margin: EdgeInsets.all(5),
                                     decoration: BoxDecoration(
-                                        color: currentIndex4 == i ? Color.fromRGBO(57, 52, 118, 1) : Colors.white,
+                                        color: currentIndex4 == i
+                                            ? Color.fromRGBO(57, 52, 118, 1)
+                                            : Colors.white.withOpacity(0.35),
                                         shape: BoxShape.circle,
                                         boxShadow: [
                                           BoxShadow(
