@@ -60,6 +60,7 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   open_filex: ^4.3.4
   collection: ^1.17.2
+  shimmer: ^3.0.0
  
 dev_dependencies:
   flutter_test:
