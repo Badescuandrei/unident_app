@@ -23,31 +23,23 @@ class _LoadingScreenState extends State<LoadingScreen> {
     // (setPage);
     super.initState();
     loadData();
-    navigateToHome();
   }
 
   loadData() async {
     List<Medic>? meds = await apiCallFunctions.getListaMedici();
     // List<MedicSlotLiber>? medsFiltrati = await apiCallFunctions.getListaMediciSlotLiber();
-    Shared.medici.clear();
-    Shared.mediciFiltrati.clear();
     if (meds != null) {
       Shared.medici.addAll(meds);
     }
-    // if (medsFiltrati != null) {
+    navigateToHome(); // if (medsFiltrati != null) {
     //   Shared.mediciFiltrati.addAll(medsFiltrati);
     // }
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   navigateToHome() {
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const Home();
-      }));
-    });
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return const Home();
+    }));
   }
 
   @override
@@ -58,9 +50,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           gradient: LinearGradient(colors: <Color>[
-            Color(0xFFFFC65C),
+            Color(0xFFC4A462),
             // Color(0xFFC53C5D),
-            Color(0xFF110D5C),
+            Color(0xFF22226C),
           ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         ),
         child: Column(

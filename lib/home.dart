@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       // key: scaffoldKey,
       bottomNavigationBar: SalomonBottomBar(
-        selectedItemColor: const Color.fromRGBO(57, 52, 118, 1),
+        selectedItemColor: const Color(0xFF22226C),
         currentIndex: currentIndexNavBar,
         onTap: (i) {
           if (i == 1) {
@@ -81,13 +81,13 @@ class _HomeState extends State<Home> {
           /// Home
           SalomonBottomBarItem(
             icon: const ImageIcon(AssetImage('./assets/images/navbar/icons8-home-55.png')),
-            title: const Text("Acasa"),
+            title: const Text("Acasă"),
           ),
 
           /// Likes
           SalomonBottomBarItem(
             icon: const ImageIcon(AssetImage('./assets/images/navbar/calendar.png')),
-            title: const Text("Programari"),
+            title: const Text("Programări"),
           ),
 
           /// Search
@@ -168,13 +168,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              drawerList(Icons.home, "Home", 0),
-              drawerList(Icons.send, "Solicita o programare", 1),
+              drawerList(Icons.home, "Acasă", 0),
+              drawerList(Icons.send, "Solicită o programare", 1),
               drawerList(Icons.calendar_month, "Planul de tratament", 2),
               drawerList(Icons.attach_money_outlined, "Tarife", 3),
               drawerList(Icons.people_alt, "Medici", 4),
-              drawerList(Icons.location_on_outlined, "Clinicile Uident", 5),
-              drawerList(Icons.star_border, "Promotii lunare", 6),
+              drawerList(Icons.location_on_outlined, "Clinicile Unident", 5),
+              drawerList(Icons.star_border, "Oferte", 6),
               drawerList(Icons.airplanemode_active_rounded, "Turism dentar", 7),
               drawerList(Icons.contact_page_outlined, "Contact", 8),
               drawerList(Icons.account_box_outlined, "Contul meu", 9)
