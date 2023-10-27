@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'dart:io';
 import 'package:unident_app/documents_list_screen.dart';
 import 'package:unident_app/my_account_change_data.dart';
+import 'package:unident_app/redirect_recenzii.dart';
 // import 'package:unident_app/tratamente.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
 import '../utils/shared_pref_keys.dart' as pref_keys;
@@ -45,7 +46,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
           title: const Text(
-            'CONTUL MEU',
+            'Contul meu',
             style: TextStyle(
               color: Color.fromARGB(255, 10, 10, 135),
             ),
@@ -219,7 +220,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Descarcati documentele dvs.',
+                                'Descărcați documentele dvs.',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -230,7 +231,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                 height: 10,
                               ),
                               Text(
-                                'Puteti descarca cele mai recente documente medicale, precum radiografiile',
+                                'Puteți descărca cele mai recente documente medicale ( radiografii, plan de tratament)',
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
@@ -301,43 +302,50 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               //   ),
               // ),
               // const SizedBox(height: 15),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.15,
-                width: MediaQuery.of(context).size.width * 0.85,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 5, 5, 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Lasa-ne o recenzie',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const RedirectFeedback();
+                  }));
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(20, 5, 5, 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Lasați-ne o recenzie',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text('Parerea si feedback-ul dumneavoastra ne ajuta sa crestem calitatea serviciilor',
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
-                          ],
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text('Părerea și feedback-ul dumneavoastră ne ajută să creștem calitatea serviciilor',
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 30)

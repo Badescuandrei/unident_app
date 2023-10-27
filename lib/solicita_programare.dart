@@ -137,10 +137,11 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: controllerDetails,
-                  keyboardType: TextInputType.multiline,
+                  keyboardType: TextInputType
+                      .streetAddress, // Input-ul asta afiseaza tastatura cu buton care ii da hide odata ce termini de scris
                   maxLines: 4,
                   decoration: const InputDecoration(
-                      hintText: "Introducti cateva detalii despre problema dvs.",
+                      hintText: "Introduceți câteva detalii despre problema dvs.",
                       hintStyle: TextStyle(color: Colors.black54),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -203,7 +204,7 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
   Future<String?> sendAppointmentRequest() async {
     if (controllerDetails.text.isEmpty) {
       Flushbar(
-        message: "Adaugati cateva detalii!",
+        message: "Adăugați câteva detalii!",
         icon: Icon(
           Icons.info_outline,
           size: 28.0,
@@ -222,7 +223,7 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
       return null;
     } else if (selectedDate.hour == 0) {
       Flushbar(
-        message: "Selectati o ora!",
+        message: "Selectați o oră!",
         icon: Icon(
           Icons.info_outline,
           size: 28.0,
@@ -265,7 +266,7 @@ class _SolicitaProgramareScreenState extends State<SolicitaProgramareScreen> {
 
       if (res!.startsWith("13")) {
         Flushbar(
-          message: "Cerere trimisa cu succes!",
+          message: "Cerere trimisă cu succes!",
           icon: const Icon(
             Icons.info_outline,
             size: 28.0,

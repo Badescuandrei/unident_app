@@ -166,6 +166,7 @@ class DetaliiProgramare {
 }
 
 class Programare {
+  final String locatie;
   final String idMedic;
   String hasFeedback;
   final String id;
@@ -179,6 +180,7 @@ class Programare {
 
   Programare(
       {required this.idMedic,
+      required this.locatie,
       required this.hasFeedback,
       required this.id,
       required this.medic,

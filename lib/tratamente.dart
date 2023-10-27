@@ -55,7 +55,7 @@ class _TratamenteScreenState extends State<TratamenteScreen> {
               },
               icon: const Icon(Icons.menu),
             ),
-            title: const Text('PLANUL DE TRATAMENT', style: TextStyle(fontSize: 20)),
+            title: const Text('Planul de tratament', style: TextStyle(fontSize: 20)),
             backgroundColor: Color.fromRGBO(57, 52, 118, 1),
             centerTitle: true),
         backgroundColor: const Color.fromARGB(255, 236, 236, 236),
@@ -64,9 +64,13 @@ class _TratamenteScreenState extends State<TratamenteScreen> {
           child: Column(
             children: [
               const SizedBox(height: 30),
-              Center(
-                child: tratamenteToggleTab(context),
-              ),
+              Shared.familie.length == 0
+                  ? Center(
+                      child: tratamenteToggleTabDacaNuAreCopil(context),
+                    )
+                  : Center(
+                      child: tratamenteToggleTabDacaAreCopil(context),
+                    ),
               const SizedBox(height: 20),
               tratamenteToggle
                   ? FutureBuilder(
@@ -182,7 +186,55 @@ class _TratamenteScreenState extends State<TratamenteScreen> {
     );
   }
 
-  AppinioAnimatedToggleTab tratamenteToggleTab(BuildContext context) {
+  AppinioAnimatedToggleTab tratamenteToggleTabDacaNuAreCopil(BuildContext context) {
+    return AppinioAnimatedToggleTab(
+      duration: const Duration(milliseconds: 150),
+      offset: 0,
+      callback: (int index) {
+        null;
+      },
+      tabTexts: const ['Programările dvs'],
+      height: 45,
+      width: MediaQuery.of(context).size.width * 0.9,
+      boxDecoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: [
+          kDefaultBoxshadow,
+        ],
+      ),
+      animatedBoxDecoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 63, 119, 153).withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(2, 2),
+          ),
+        ],
+        color: Colors.white,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(5),
+        ),
+        border: Border.all(
+          color: Colors.white,
+          width: 1,
+        ),
+      ),
+      activeStyle: TextStyle(
+        fontSize: 12,
+        color: kDarkBlueColor,
+        fontWeight: FontWeight.w600,
+      ),
+      inactiveStyle: const TextStyle(
+        fontSize: 12,
+        color: Colors.black,
+        fontWeight: FontWeight.w400,
+      ),
+    );
+  }
+
+  AppinioAnimatedToggleTab tratamenteToggleTabDacaAreCopil(BuildContext context) {
     return AppinioAnimatedToggleTab(
       duration: const Duration(milliseconds: 150),
       offset: 0,

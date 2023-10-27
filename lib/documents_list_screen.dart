@@ -56,7 +56,9 @@ class _DocumentUserScreenState extends State<DocumentUserScreen> {
         child: Column(
           children: [
             SizedBox(height: 20),
-            documenteUserToggle(context),
+            Shared.familie.length == 0
+                ? documenteUserDacaNuAreCopilToggle(context)
+                : documenteUserDacaAreCopilToggle(context),
             const SizedBox(height: 20),
             documenteToggle ? listaDocumenteUser() : listaDocumenteCopil(),
             const SizedBox(height: 20),
@@ -226,7 +228,57 @@ class _DocumentUserScreenState extends State<DocumentUserScreen> {
     return await OpenFilex.open(myFile.path);
   }
 
-  AppinioAnimatedToggleTab documenteUserToggle(BuildContext context) {
+  AppinioAnimatedToggleTab documenteUserDacaNuAreCopilToggle(BuildContext context) {
+    return AppinioAnimatedToggleTab(
+      duration: const Duration(milliseconds: 150),
+      offset: 0,
+      callback: (int index) {
+        null;
+      },
+      tabTexts: const [
+        'Documentele dvs.',
+      ],
+      height: 45,
+      width: MediaQuery.of(context).size.width * 0.9,
+      boxDecoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: [
+          kDefaultBoxshadow,
+        ],
+      ),
+      animatedBoxDecoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 63, 119, 153).withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(2, 2),
+          ),
+        ],
+        color: Colors.white,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(5),
+        ),
+        border: Border.all(
+          color: Colors.white,
+          width: 1,
+        ),
+      ),
+      activeStyle: TextStyle(
+        fontSize: 12,
+        color: kDarkBlueColor,
+        fontWeight: FontWeight.w600,
+      ),
+      inactiveStyle: const TextStyle(
+        fontSize: 12,
+        color: Colors.black,
+        fontWeight: FontWeight.w400,
+      ),
+    );
+  }
+
+  AppinioAnimatedToggleTab documenteUserDacaAreCopilToggle(BuildContext context) {
     return AppinioAnimatedToggleTab(
       duration: const Duration(milliseconds: 150),
       offset: 0,

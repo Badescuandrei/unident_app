@@ -50,56 +50,59 @@ class DoctorDetailsScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: sizedboxHeight),
-            SizedBox(
-              height: MediaQuery.of(context).size.width * 0.5,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: SizedBox(
-                        child: Image.memory(
-                      poza,
-                      height: 200,
-                      width: 175,
-                      fit: BoxFit.cover,
-                    )),
-                  ),
-                  const SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(judet,
-                          maxLines: 3,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              overflow: TextOverflow.ellipsis)),
-                      const SizedBox(height: 5),
-                      Text(nume,
-                          maxLines: 2,
-                          style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              overflow: TextOverflow.ellipsis)),
-                      const SizedBox(height: 15),
-                      for (var job in jobs)
-                        Text(job.trim(),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            )),
-                    ],
-                  )
-                ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.width * 0.5,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: SizedBox(child: Image.memory(poza, height: 190, width: 175, fit: BoxFit.cover)),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 20),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(judet,
+                              maxLines: 3,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  overflow: TextOverflow.ellipsis)),
+                          const SizedBox(height: 5),
+                          Text(nume,
+                              maxLines: 3,
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  overflow: TextOverflow.ellipsis)),
+                          const SizedBox(height: 15),
+                          for (var job in jobs)
+                            Text(job.trim(),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                )),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: sizedboxHeight),
+            SizedBox(height: 40),
             Container(
               padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
               height: MediaQuery.of(context).size.height * 0.65,
@@ -182,7 +185,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 45),
                   Container(
                       height: 50,
                       width: MediaQuery.of(context).size.width * 0.7,

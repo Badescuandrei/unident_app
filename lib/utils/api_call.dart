@@ -78,10 +78,10 @@ class ApiCall {
       data = XmlDocument.parse(response.body).findAllElements('${pNumeMetoda}Result').first.firstChild.toString();
       // print(data);
     } catch (e) {
-      // print('EROARE XML - ' + pNumeMetoda);
-      // print(response.body);
+      print('EROARE XML - ' + pNumeMetoda);
+      print(response.body);
       // showSnackbar(l.universalEroare);
-      return 'Error parsing';
+      return 'Error parsing - ';
     }
 
     switch (data) {
@@ -105,6 +105,7 @@ class ApiCall {
         return 'Eroare';
 
       case api_response.dateGresite:
+        print(response.body);
         print('DATE GRESITE - ' + pNumeMetoda);
         return "66";
       // showSnackbar(l.universalMesajUserNeasociat);

@@ -54,7 +54,7 @@ class _RedirectTurismState extends State<RedirectTurism> {
             },
             icon: const Icon(Icons.menu),
           ),
-          title: const Text('TURISM DENTAR'),
+          title: const Text('Tursim dentar'),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(57, 52, 118, 1),
         ),
@@ -79,7 +79,7 @@ class _RedirectTurismState extends State<RedirectTurism> {
 
   void pageScroll() async {
     Future.delayed(const Duration(milliseconds: 10), () {
-      controller.scrollTo(0, 1000);
+      controller.scrollTo(0, 500);
     });
   }
 }

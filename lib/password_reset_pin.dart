@@ -36,9 +36,9 @@ class _PasswordResetPinState extends State<PasswordResetPin> {
           width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
             gradient: LinearGradient(colors: <Color>[
-              Color(0xFFFFC65C),
+              Color(0xFFC4A462),
               // Color(0xFFC53C5D),
-              Color(0xFF110D5C),
+              Color(0xFF22226C),
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
           ),
           child: Column(
@@ -184,7 +184,7 @@ class _PasswordResetPinState extends State<PasswordResetPin> {
                 padding: const EdgeInsets.symmetric(horizontal: 52),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFC3A16E),
+                      backgroundColor: Color(0xFFC4A462),
                       minimumSize: const Size.fromHeight(50), // NEW
                     ),
                     child: const Text(

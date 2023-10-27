@@ -37,9 +37,9 @@ class _PasswordResetState extends State<PasswordReset> {
           width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
             gradient: LinearGradient(colors: <Color>[
-              Color(0xFFFFC65C),
+              Color(0xFFC4A462),
               // Color(0xFFC53C5D),
-              Color(0xFF110D5C),
+              Color(0xFF22226C),
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
           ),
           child: Column(
@@ -51,25 +51,26 @@ class _PasswordResetState extends State<PasswordReset> {
                     IconButton(
                         icon: const Icon(
                           Icons.arrow_back_ios_new_rounded,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                         color: Colors.black,
                         onPressed: () => Navigator.pop(context)),
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: const Text(
-                        "Inapoi",
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400, color: Colors.white),
+                        "Înapoi",
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400, color: Colors.black),
                       ),
                     )
                   ]),
                 ],
               ),
+              const SizedBox(height: 55),
               Image.asset(
                 './assets/images/unident-alb.png',
                 height: 70,
               ),
-              const SizedBox(height: 75),
+              const SizedBox(height: 100),
 
               // Welcome message
               const Padding(
@@ -78,7 +79,7 @@ class _PasswordResetState extends State<PasswordReset> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "Reseteaza parola!",
+                      "Resetează parola!",
                       style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
                   ],
@@ -95,7 +96,7 @@ class _PasswordResetState extends State<PasswordReset> {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFC3A16E),
+                    backgroundColor: Color.fromARGB(255, 176, 146, 86),
                     minimumSize: const Size.fromHeight(50), // NEW
                   ),
                   onPressed: () {
@@ -104,9 +105,12 @@ class _PasswordResetState extends State<PasswordReset> {
                       resetPassword();
                     }
                   },
-                  child: const Text(
-                    'Trimite cererea de resetare',
-                    style: TextStyle(fontSize: 24),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: const Text(
+                      'Trimite cererea de resetare',
+                      style: TextStyle(fontSize: 24),
+                    ),
                   ),
                 ),
               ),
@@ -118,70 +122,63 @@ class _PasswordResetState extends State<PasswordReset> {
     );
   }
 
-  Form loginForm() {
-    return Form(
-      key: loginKey,
-      child: Column(
-        children: [
-          TextFormField(
-            onFieldSubmitted: (String s) {
-              focusNodePassword.requestFocus();
-            },
-            controller: controllerEmail,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                borderSide: BorderSide.none,
-              ),
-              focusedBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8.0)), borderSide: BorderSide.none),
-              hoverColor: Colors.red,
-              filled: true,
-              fillColor: Colors.white,
-              hintText: "E-mail",
+  Container loginForm() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.all(10),
+      child: Form(
+        key: loginKey,
+        child: Column(
+          children: [
+            TextFormField(
+              onFieldSubmitted: (String s) {
+                focusNodePassword.requestFocus();
+              },
+              controller: controllerEmail,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  icon: Image.asset('./assets/images/login/icons8-email-48.png', height: 22, width: 22),
+                  hintText: 'E-mail',
+                  enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                  filled: true,
+                  fillColor: Colors.white),
+              validator: (value) {
+                if (value!.isEmpty || !RegExp(r'.+@.+\.+').hasMatch(value)) {
+                  return "Introduceți un e-mail valid";
+                } else {
+                  return null;
+                }
+              },
             ),
-            validator: (value) {
-              if (value!.isEmpty || !RegExp(r'.+@.+\.+').hasMatch(value)) {
-                return "Enter a valid Email Address";
-              } else {
-                return null;
-              }
-            },
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          TextFormField(
-            focusNode: focusNodePassword,
-            controller: controllerPass,
-            obscureText: isHidden,
-            decoration: InputDecoration(
-                suffixIcon: IconButton(
-                    onPressed: passVisibiltyToggle,
-                    icon: isHidden ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
-                hintText: "Parola noua",
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.white),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Please Enter New Password";
-              } else if (value.length < 6) {
-                return "Password must be atleast 6 characters long";
-              } else {
-                return null;
-              }
-            },
-          ),
-        ],
+            Divider(thickness: 1, color: Colors.grey[300]),
+            TextFormField(
+              focusNode: focusNodePassword,
+              controller: controllerPass,
+              obscureText: isHidden,
+              decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                      onPressed: passVisibiltyToggle,
+                      icon: isHidden ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                  icon: Image.asset('./assets/images/login/icons8-key-50.png', height: 22, width: 22),
+                  hintText: 'Parolă',
+                  enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                  filled: true,
+                  fillColor: Colors.white),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Introduceți o parolă";
+                } else if (value.length < 6) {
+                  return "Parola trebuie sa conțină minim 6 caractere";
+                } else {
+                  return null;
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

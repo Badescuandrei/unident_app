@@ -189,33 +189,38 @@ class ApiCallFunctions {
         }
 
         DateTime dataPrimulSlotLiber = DateTime(1, 1, 1);
-        print(list.length);
+        // print(list.length);
+
         if (list.length > 9) {
+          print(list[9]);
           dataPrimulSlotLiber = DateTime.utc(int.parse(list[9].substring(0, 4)), int.parse(list[9].substring(4, 6)),
               int.parse(list[9].substring(6, 8)));
-          denumireSediu = list[10];
-          idCabinet = list[11];
-          idSediu = list[12];
-          judet = list[8];
-          localitate = list[13];
+
+          denumireSediu = list[12];
+          idCabinet = list[10];
+          idSediu = list[11];
+          judet = list[13];
+          localitate = list[14];
           // print(data);
           // print(list[7]);
         }
-        medici.add(MedicSlotLiber(
-            denumireSediu: denumireSediu,
-            idCabinet: idCabinet,
-            idSediu: idSediu,
-            judet: judet,
-            localitate: localitate,
-            profesii: profesii,
-            id: list[0],
-            nume: list[1],
-            poza: Uint8List.fromList(ints),
-            miniCv: list[3],
-            areCvDetaliat: list[4] == '1' ? true : false,
-            listaSedii: sedii,
-            listaCategorii: cats,
-            dataPrimulSlotLiber: dataPrimulSlotLiber));
+        if (dataPrimulSlotLiber != DateTime(1, 1, 1)) {
+          medici.add(MedicSlotLiber(
+              denumireSediu: denumireSediu,
+              idCabinet: idCabinet,
+              idSediu: idSediu,
+              judet: judet,
+              localitate: localitate,
+              profesii: profesii,
+              id: list[0],
+              nume: list[1],
+              poza: Uint8List.fromList(ints),
+              miniCv: list[3],
+              areCvDetaliat: list[4] == '1' ? true : false,
+              listaSedii: sedii,
+              listaCategorii: cats,
+              dataPrimulSlotLiber: dataPrimulSlotLiber));
+        }
 
         // print(list.length);
       }
@@ -335,18 +340,20 @@ class ApiCallFunctions {
 
 //TODO verif
         Programare p = Programare(
-            nume: '',
-            prenume: '',
-            idPacient: '',
-            medic: l[2],
-            categorie: l[3],
-            status: l[4],
-            anulata: l[5],
-            inceput: date,
-            sfarsit: dateSf,
-            id: l[6],
-            hasFeedback: l[7],
-            idMedic: l[8]);
+          nume: '',
+          prenume: '',
+          idPacient: '',
+          medic: l[2],
+          categorie: l[3],
+          status: l[4],
+          anulata: l[5],
+          inceput: date,
+          sfarsit: dateSf,
+          id: l[6],
+          hasFeedback: l[7],
+          idMedic: l[8],
+          locatie: l[9],
+        );
         programariViitoare.add(p);
       }
 
@@ -380,7 +387,8 @@ class ApiCallFunctions {
             inceput: date,
             sfarsit: dateSf,
             hasFeedback: l[7],
-            idMedic: l[8]);
+            idMedic: l[8],
+            locatie: l[9]);
         programariTrecute.add(p);
       }
     }
@@ -672,6 +680,23 @@ class ApiCallFunctions {
     return data;
   }
 
+  Future<String?> adaugaTaskActualizareDateContact({
+    required String pAdresaMailNoua,
+    required String pTelefonNou,
+  }) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, String> param = {
+      'pAdresaMail': prefs.getString(pref_keys.userEmail)!,
+      'pParolaMD5': prefs.getString(pref_keys.userPassMD5)!,
+      'pTelefonNou': pTelefonNou,
+      'pAdresaMailNoua': pAdresaMailNoua,
+    };
+
+    String? data =
+        await apiCall.apeleazaMetodaString(pNumeMetoda: 'AdaugaTaskActualizareDateContact', pParametrii: param);
+    return data;
+  }
+
   Future<String?> schimbaDateleDeContactValidarePin({
     required String pAdresaMail,
     required String pParola,
@@ -724,6 +749,7 @@ class ApiCallFunctions {
       'pNota': nota,
     };
     String? data = await apiCall.apeleazaMetodaString(pNumeMetoda: 'AdaugaFeedbackPeMedic', pParametrii: param);
+    print(data);
     return data;
   }
 

@@ -62,7 +62,7 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
               },
               icon: const Icon(Icons.menu),
             ),
-            title: const Text('PROGRAMĂRI', style: TextStyle(fontSize: 20)),
+            title: const Text('Programări', style: TextStyle(fontSize: 20)),
             backgroundColor: Color.fromRGBO(57, 52, 118, 1),
             centerTitle: true),
         body: SafeArea(
@@ -73,10 +73,10 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 25),
-                Center(
-                  child: mainToggleTab(context),
-                ),
-                const SizedBox(height: 15),
+                Shared.familie.length == 0
+                    ? Center(child: mainToggleTabDacaNuAreCopil(context))
+                    : Center(child: mainToggleTabDacaAreCopil(context)),
+                SizedBox(height: 15),
                 programariToggle ? listaProgramariUser(context) : listaProgramariCopil(context)
                 // currentIndex == 0
                 //     ? butoaneDeApasat(context)
@@ -157,7 +157,55 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
     );
   }
 
-  AppinioAnimatedToggleTab mainToggleTab(BuildContext context) {
+  AppinioAnimatedToggleTab mainToggleTabDacaNuAreCopil(BuildContext context) {
+    return AppinioAnimatedToggleTab(
+      duration: const Duration(milliseconds: 150),
+      offset: 0,
+      callback: (int index) {
+        null;
+      },
+      tabTexts: const ['Programările dvs'],
+      height: 45,
+      width: MediaQuery.of(context).size.width * 0.9,
+      boxDecoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: [
+          kDefaultBoxshadow,
+        ],
+      ),
+      animatedBoxDecoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 63, 119, 153).withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(2, 2),
+          ),
+        ],
+        color: Colors.white,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(5),
+        ),
+        border: Border.all(
+          color: Colors.white,
+          width: 1,
+        ),
+      ),
+      activeStyle: TextStyle(
+        fontSize: 12,
+        color: kDarkBlueColor,
+        fontWeight: FontWeight.w600,
+      ),
+      inactiveStyle: const TextStyle(
+        fontSize: 12,
+        color: Colors.black,
+        fontWeight: FontWeight.w400,
+      ),
+    );
+  }
+
+  AppinioAnimatedToggleTab mainToggleTabDacaAreCopil(BuildContext context) {
     return AppinioAnimatedToggleTab(
       duration: const Duration(milliseconds: 150),
       offset: 0,
@@ -167,10 +215,7 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
           // currentIndexprogramariToggle = index;
         });
       },
-      tabTexts: const [
-        'Programările dvs',
-        'Programprile copilului',
-      ],
+      tabTexts: const ['Programările dvs', 'Programările copilului'],
       height: 45,
       width: MediaQuery.of(context).size.width * 0.9,
       boxDecoration: BoxDecoration(
@@ -222,7 +267,7 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
         });
       },
       tabTexts: const [
-        'Programări trecute',
+        'Programări finalizate',
         'Programări viitoare',
       ],
       height: 45,
@@ -276,8 +321,8 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
         });
       },
       tabTexts: const [
-        'Programari trecute',
-        'Programari viitoare',
+        'Programări finalizate',
+        'Programări viitoare',
       ],
       height: 45,
       width: MediaQuery.of(context).size.width * 0.6,
@@ -394,7 +439,8 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             sfarsit: dateSf,
             id: l[6],
             hasFeedback: l[7],
-            idMedic: l[8]);
+            idMedic: l[8],
+            locatie: l[9]);
         programariViitoare.add(p);
       }
 
@@ -428,14 +474,15 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             inceput: date,
             sfarsit: dateSf,
             hasFeedback: l[7],
-            idMedic: l[8]);
+            idMedic: l[8],
+            locatie: l[9]);
         programariTrecute.add(p);
       }
     }
     programariTrecute.sort((a, b) => b.inceput.compareTo(a.inceput));
     programariViitoare.sort((a, b) => a.inceput.compareTo(b.inceput));
     Programari? pP = Programari(trecute: programariTrecute, viitoare: programariViitoare);
-    print(" ASta e ${programariViitoare.length}");
+    // print(" ASta e ${programariViitoare.length}");
     setState(() {
       viitoare = programariViitoare.reversed.toList();
       trecute = programariTrecute.reversed.toList();
@@ -521,7 +568,8 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             sfarsit: dateSf,
             id: l[6],
             hasFeedback: l[7],
-            idMedic: l[8]);
+            idMedic: l[8],
+            locatie: l[9]);
         programariViitoareCopil.add(p);
       }
 
@@ -555,14 +603,15 @@ class _ProgramariScreenState extends State<ProgramariScreen> {
             inceput: date,
             sfarsit: dateSf,
             hasFeedback: l[7],
-            idMedic: l[8]);
+            idMedic: l[8],
+            locatie: l[9]);
         programariTrecuteCopil.add(p);
       }
     }
     programariTrecuteCopil.sort((a, b) => b.inceput.compareTo(a.inceput));
     programariViitoareCopil.sort((a, b) => a.inceput.compareTo(b.inceput));
     Programari? pP = Programari(trecute: programariTrecuteCopil, viitoare: programariViitoareCopil);
-    print(" ASta e ${programariViitoareCopil.length}");
+    // print(" ASta e ${programariViitoareCopil.length}");
     setState(() {
       viitoareCopil = programariViitoareCopil.reversed.toList();
       trecuteCopil = programariTrecuteCopil.reversed.toList();
@@ -670,16 +719,19 @@ class _detaliiProgramareWidgetState extends State<detaliiProgramareWidget> {
                           ],
                         ),
                       ),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'UNIDENT',
-                              style: TextStyle(color: Colors.black45),
-                            ),
-                            SizedBox(height: 5),
-                            Text('Tulcea', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+                            // Daca vor sa arate exact ca in design, trebuie decomentat si pe locatie trebuie sa se faca putina procesare incat sa se elimine
+                            // prima parte din String deoarce au locatiile tercute in soft "UNIDENT TULCEA, UNIDENT GALATI etc."
+                            // Text(
+                            //   'UNIDENT',
+                            //   style: TextStyle(color: Colors.black45),
+                            // ),
+                            // SizedBox(height: 5),
+                            Text(widget.programare!.locatie,
+                                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
                           ],
                         ),
                       ),
@@ -722,6 +774,7 @@ class _detaliiProgramareWidgetState extends State<detaliiProgramareWidget> {
             )
           ]),
         ),
+        // Daca nu este maracata deja cu feedback venita din API sau este in trecut, atunci poate avea feedback
         widget.programare!.hasFeedback == "0" && widget.programare!.inceput.isBefore(DateTime.now())
             ? Positioned(
                 right: 2,

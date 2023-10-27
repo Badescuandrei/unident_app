@@ -1,3 +1,5 @@
+import 'package:another_flushbar/flushbar.dart';
+
 import './password_reset_pin.dart';
 import './utils/functions.dart';
 import '../utils/shared_pref_keys.dart' as pref_keys;
@@ -51,35 +53,26 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios_new),
+          ),
+          title: const Text('Profilul meu', style: TextStyle(fontSize: 20)),
+          backgroundColor: const Color.fromRGBO(57, 52, 118, 1),
+          centerTitle: true),
       backgroundColor: const Color.fromARGB(255, 236, 236, 236),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 30),
-            Row(children: [
-              IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                  color: Colors.black,
-                  onPressed: () => Navigator.pop(context)),
-              GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: const Text("Inapoi",
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black)))
-            ]),
-            const SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  const Row(
-                    children: [
-                      Text(
-                        "Profilul meu",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                      )
-                    ],
-                  ),
                   const SizedBox(height: 15),
                   registrationFields(),
                   const SizedBox(height: 20),
@@ -95,7 +88,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       }
                     },
                     child: const Text(
-                      'Schimba datele',
+                      'Schimbă datele',
                       style: TextStyle(fontSize: 24),
                     ),
                   ),
@@ -191,7 +184,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     setState(() {
       hintNume = prefs.getString(pref_keys.userNume)!;
       hintPrenume = prefs.getString(pref_keys.userPrenume)!;
-      hintDataNastere = prefs.getString(pref_keys.userDDN)!;
       hintTelefon = prefs.getString(pref_keys.userTelefon)!;
       hintEmail = prefs.getString(pref_keys.userEmail)!;
       hintParola = prefs.getString(pref_keys.userPassMD5)!;
@@ -199,40 +191,84 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 
   changeUserData() async {
-    String? res = await apiCallFunctions.schimbaDateleDeContact(
-      pNouaAdresaDeEmail: controllerEmail.text.isEmpty ? hintEmail : controllerEmail.text,
-      pNoulTelefon: controllerTelefon.text.isEmpty ? hintTelefon : controllerTelefon.text,
-      pAdresaDeEmail: hintEmail,
-      pParola: hintParola,
+    String? res = await apiCallFunctions.adaugaTaskActualizareDateContact(
+      pAdresaMailNoua: controllerEmail.text.isEmpty ? hintEmail : controllerEmail.text.trim(),
+      pTelefonNou: controllerTelefon.text.isEmpty ? hintTelefon : controllerTelefon.text.trim(),
     );
     print(res);
     if (res == null) {
-      showSnackbar(
-        context,
-        "Eroare schimbare date contact!",
-      );
+      Flushbar(
+        message: "Eroare server!",
+        icon: const Icon(
+          Icons.info_outline,
+          size: 28.0,
+          color: Colors.red,
+        ),
+        borderColor: Colors.red,
+        borderWidth: 2,
+        isDismissible: false,
+        margin: const EdgeInsets.all(6.0),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        borderRadius: BorderRadius.circular(12),
+        duration: Duration(seconds: 3),
+        leftBarIndicatorColor: Colors.red,
+      ).show(context);
       return;
     } else if (res.startsWith('66')) {
-      showSnackbar(context, "Date gresite");
+      Flushbar(
+        message: "Date greșite, verifică cu atenție datele introduse și încearca încă o dată!",
+        icon: const Icon(
+          Icons.info_outline,
+          size: 28.0,
+          color: Colors.red,
+        ),
+        borderColor: Colors.red,
+        borderWidth: 2,
+        isDismissible: false,
+        margin: const EdgeInsets.all(6.0),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        borderRadius: BorderRadius.circular(12),
+        duration: Duration(seconds: 3),
+        leftBarIndicatorColor: Colors.red,
+      ).show(context);
       return;
     } else if (res.startsWith('13')) {
-      showSnackbar(context, "Date corecte - cerere trimisa!");
-      setState(
-        () {
-          verificationOk = true;
-          if (verificationOk) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => PasswordResetPin(
-                  resetEmailOrPhoneNumber: true,
-                  email: hintEmail,
-                  password: hintParola,
-                ),
-              ),
-            );
-          }
-        },
-      );
+      Flushbar(
+        message: "Date corecte, cererea a fost trimisă!",
+        icon: const Icon(
+          Icons.info_outline,
+          size: 28.0,
+          color: Colors.green,
+        ),
+        borderColor: Colors.green,
+        borderWidth: 2,
+        isDismissible: false,
+        margin: const EdgeInsets.all(6.0),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        borderRadius: BorderRadius.circular(12),
+        duration: Duration(seconds: 3),
+        leftBarIndicatorColor: Colors.green,
+      ).show(context);
+      // setState(
+      //   () {
+      //     verificationOk = true;
+      //     if (verificationOk) {
+      //       Navigator.of(context).push(
+      //         MaterialPageRoute(
+      //           builder: (context) => PasswordResetPin(
+      //             resetEmailOrPhoneNumber: true,
+      //             email: hintEmail,
+      //             password: hintParola,
+      //           ),
+      //         ),
+      //       );
+      //     }
+      //   },
+      // );
+      return;
     }
   }
 }

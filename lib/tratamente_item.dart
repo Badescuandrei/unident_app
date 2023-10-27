@@ -23,13 +23,20 @@ class TratamenteItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                DateFormat('yMd', 'ro').format(data),
-                style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
+              Expanded(
+                flex: 5,
+                child: Text(
+                  DateFormat('yMd', 'ro').format(data),
+                  style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
+                ),
               ),
-              Text(
-                doctor,
-                style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
+              SizedBox(width: 70),
+              Expanded(
+                flex: 5,
+                child: Text(
+                  doctor,
+                  style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
@@ -41,14 +48,19 @@ class TratamenteItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
+                flex: 4,
                 child: Text(
                   procedure,
                   style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w400),
                 ),
               ),
-              Text(
-                price,
-                style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w400),
+              SizedBox(width: 20),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  price,
+                  style: const TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w400),
+                ),
               ),
             ],
           )

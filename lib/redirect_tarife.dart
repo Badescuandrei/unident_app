@@ -52,7 +52,7 @@ class _RedirectTarifState extends State<RedirectTarif> {
             },
             icon: const Icon(Icons.menu),
           ),
-          title: const Text('TARIFE'),
+          title: const Text('Tarife'),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(57, 52, 118, 1),
         ),
@@ -77,7 +77,7 @@ class _RedirectTarifState extends State<RedirectTarif> {
 
   void pageScroll() async {
     Future.delayed(const Duration(milliseconds: 500), () {
-      controller.scrollTo(0, 800);
+      controller.scrollTo(0, 300);
     });
   }
 }

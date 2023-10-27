@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -104,6 +105,8 @@ class _FeedbackScreen extends State<FeedbackScreen> {
                   ),
                   height: 130,
                   child: TextField(
+                    keyboardType: TextInputType.streetAddress,
+                    textCapitalization: TextCapitalization.words,
                     controller: controllerFeedbackText,
                     style: const TextStyle(color: Color.fromRGBO(103, 114, 148, 1)), //added by George Valentin Iordache
                     //decoration: InputDecoration(border: InputBorder.none, hintText: 'Doctorul a raspuns rapid...'),
@@ -134,7 +137,28 @@ class _FeedbackScreen extends State<FeedbackScreen> {
                             pObservatii: controllerFeedbackText.text,
                             pIdMedic: widget.programare.idMedic)
                         .then((value) {
-                      value == "13" ? {widget.programare.hasFeedback = "1", Navigator.pop(context)} : null;
+                      value == "13"
+                          ? {
+                              widget.programare.hasFeedback = "1",
+                              Flushbar(
+                                message: "Feedback-ul a fost trimis, vă mulțumim!",
+                                icon: const Icon(
+                                  Icons.info_outline,
+                                  size: 28.0,
+                                  color: Colors.green,
+                                ),
+                                borderColor: Colors.green,
+                                borderWidth: 2,
+                                isDismissible: false,
+                                margin: const EdgeInsets.all(6.0),
+                                flushbarStyle: FlushbarStyle.FLOATING,
+                                flushbarPosition: FlushbarPosition.BOTTOM,
+                                borderRadius: BorderRadius.circular(12),
+                                duration: Duration(seconds: 3),
+                                leftBarIndicatorColor: Colors.green,
+                              ).show(context).then((value) => Navigator.pop(context))
+                            }
+                          : null;
                     });
                   },
                   child: Row(
@@ -143,7 +167,7 @@ class _FeedbackScreen extends State<FeedbackScreen> {
                       Text(
                         //' TRIMITE CHESTIONARUL', old
                         // style: GoogleFonts.rubik(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18), old
-                        'TRIMITE FEEDBACK',
+                        'Trimite feedack',
                         style: GoogleFonts.rubik(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
                       ),
                     ],

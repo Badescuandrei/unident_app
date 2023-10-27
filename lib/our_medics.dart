@@ -77,7 +77,7 @@ class _OurMedicsScreenState extends State<OurMedicsScreen> {
               },
               icon: const Icon(Icons.menu),
             ),
-            title: const Text('Medicii nostri', style: TextStyle(fontSize: 32)),
+            title: const Text('Medicii noștri', style: TextStyle(fontSize: 32)),
             backgroundColor: const Color.fromRGBO(57, 52, 118, 1),
             centerTitle: true),
         body: SingleChildScrollView(
@@ -119,11 +119,11 @@ class _OurMedicsScreenState extends State<OurMedicsScreen> {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(city, style: TextStyle(fontSize: 20)),
+                          Text(city, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
                           Text("Toti medicii din ${city}", style: TextStyle(fontSize: 20))
                         ],
                       ),
@@ -292,6 +292,12 @@ class homeScreen_echipaNoastraDoctorWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.memory(
+              errorBuilder: (context, error, stackTrace) => Image.asset(
+                './assets/images/defaultProfilePictureRectangular.png',
+                height: 120,
+                width: 110,
+                fit: BoxFit.cover,
+              ),
               poza,
               height: 120,
               width: 110,

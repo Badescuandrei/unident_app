@@ -9,6 +9,7 @@ import 'package:unident_app/register.dart';
 import 'package:unident_app/utils/api_call_functions.dart';
 import 'package:unident_app/utils/api_firebase.dart';
 import 'package:unident_app/utils/classes.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../utils/shared_pref_keys.dart' as pref_keys;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/functions.dart';
@@ -49,20 +50,20 @@ class _LoginScreenState extends State<LoginScreen> {
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           gradient: LinearGradient(colors: <Color>[
-            Color(0xFFFFC65C),
+            Color(0xFFC4A462),
             // Color(0xFFC53C5D),
-            Color(0xFF110D5C),
+            Color(0xFF22226C),
           ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         ),
         child: Column(children: [
-          const SizedBox(height: 70),
+          const SizedBox(height: 100),
           Center(
             child: Image.asset(
               './assets/images/unident-alb.png',
-              width: 250,
+              width: 300,
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 100),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -94,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             }
                           },
                         ),
+                        Divider(thickness: 1, color: Colors.grey[300]),
                         TextFormField(
                           focusNode: focusNodePassword,
                           controller: controllerPass,
@@ -103,24 +105,37 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: passVisibiltyToggle,
                                   icon: isHidden ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
                               icon: Image.asset('./assets/images/login/icons8-key-50.png', height: 22, width: 22),
-                              hintText: 'Parola',
+                              hintText: 'Parolă',
                               enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                               filled: true,
                               fillColor: Colors.white),
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return "Please Enter New Password";
+                              return "Introduceți o parolă";
                             } else if (value.length < 6) {
-                              return "Password must be atleast 6 characters long";
+                              return "Parola trebuie sa conțină minim 6 caractere";
                             } else {
                               return null;
                             }
                           },
                         ),
-                        const SizedBox(height: 10),
-                        Image.asset(
-                          './assets/images/login/CALL CENTER.png',
-                          width: 100,
+                        Divider(thickness: 1, color: Colors.grey[300]),
+                        GestureDetector(
+                          onTap: () async {
+                            final Uri url = Uri(
+                              scheme: 'tel',
+                              path: '0340991',
+                            );
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(url);
+                            } else {
+                              print("Cannot launch!");
+                            }
+                          },
+                          child: Image.asset(
+                            './assets/images/login/CALL CENTER.png',
+                            scale: 22,
+                          ),
                         ),
                       ],
                     ),
@@ -146,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 child: const Center(
                   child: Text(
-                    'Intra in cont',
+                    'Intră în cont',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.white),
                   ),
                 ),
@@ -213,7 +228,26 @@ class _LoginScreenState extends State<LoginScreen> {
       // return;
     } else if (res.startsWith('66')) {
       Flushbar(
-        message: "Date gresite, verifica cu atentie datele introduse si incearca inca o data!",
+        message: "Date greșite, verifică cu atenție datele introduse și încearca încă o dată!",
+        icon: const Icon(
+          Icons.info_outline,
+          size: 28.0,
+          color: Colors.red,
+        ),
+        borderColor: Colors.red,
+        borderWidth: 2,
+        isDismissible: false,
+        margin: const EdgeInsets.all(6.0),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        borderRadius: BorderRadius.circular(12),
+        duration: Duration(seconds: 3),
+        leftBarIndicatorColor: Colors.red,
+      ).show(context);
+      return;
+    } else if (res.startsWith('264')) {
+      Flushbar(
+        message: "Adresa de e-mail introdusă este invalidă!",
         icon: const Icon(
           Icons.info_outline,
           size: 28.0,
@@ -233,7 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (res.contains('\$#\$')) {
       // ignore: use_build_context_synchronously
       Flushbar(
-        message: "Login incheiat cu succes!",
+        message: "Login încheiat cu succes!",
         icon: const Icon(
           Icons.info_outline,
           size: 28.0,

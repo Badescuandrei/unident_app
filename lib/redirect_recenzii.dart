@@ -6,17 +6,17 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:unident_app/home.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-String url = 'https://unident.ro/pachete/';
-final _drawerController = ZoomDrawerController();
+String url =
+    'https://www.google.com/maps/place/Unident+-+Clinic%C4%83+Dentar%C4%83+Premium/@45.6726035,24.3914533,9z/data=!4m12!1m2!2m1!1s+unident!3m8!1s0x40b35b966a8e7ca7:0x849a1195f8f15429!8m2!3d45.6726035!4d25.6109357!9m1!1b1!15sCgd1bmlkZW50WgkiB3VuaWRlbnSSAQ1kZW50YWxfY2xpbmljmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5TY2twUVNHOUJSUkFC4AEA!16s%2Fg%2F11qrqt3d5p?entry=ttu';
 
-class RedirectPromotiiLunare extends StatefulWidget {
-  const RedirectPromotiiLunare({super.key});
+class RedirectFeedback extends StatefulWidget {
+  const RedirectFeedback({super.key});
 
   @override
-  State<RedirectPromotiiLunare> createState() => _RedirectPromotiiLunareState();
+  State<RedirectFeedback> createState() => _RedirectFeedbackState();
 }
 
-class _RedirectPromotiiLunareState extends State<RedirectPromotiiLunare> {
+class _RedirectFeedbackState extends State<RedirectFeedback> {
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
   final UniqueKey _key = UniqueKey();
 
@@ -49,11 +49,11 @@ class _RedirectPromotiiLunareState extends State<RedirectPromotiiLunare> {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              ZoomDrawer.of(context)!.toggle();
+              Navigator.pop(context);
             },
-            icon: const Icon(Icons.menu),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
           ),
-          title: const Text('Oferte'),
+          title: const Text('Recenzii'),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(57, 52, 118, 1),
         ),

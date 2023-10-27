@@ -16,8 +16,8 @@ List<Clinic> clinics = [
     mail: "receptie.tulcea@unident.ro",
   ),
   Clinic(
-    nume: 'Strada Brailei nr. 171A',
-    clinicName: 'Unident Galati',
+    nume: 'Strada Brăilei nr. 171A',
+    clinicName: 'Unident Galați',
     imagePath: './assets/images/clinics/clinica_buzau_50.jpg',
     location: 'Unident Clinica Dentara Premium, Galati ',
     tel: "0740705706",
@@ -25,7 +25,7 @@ List<Clinic> clinics = [
   ),
   Clinic(
     nume: 'Bulevardul Unirii nr. P6',
-    clinicName: 'Unident Buzau',
+    clinicName: 'Unident Buzău',
     imagePath: './assets/images/clinics/clinica_galati_50.jpg',
     location: 'Unident Clinica Dentara Premium, Buzau',
     tel: "0745403403",
@@ -33,7 +33,7 @@ List<Clinic> clinics = [
   ),
   Clinic(
     nume: 'Strada Ștefan Baciu nr. 2',
-    clinicName: 'Unident Brasov',
+    clinicName: 'Unident Brașov',
     imagePath: './assets/images/clinics/clinica_brasov_50.jpg',
     location: 'Unident Clinica Dentara Premium, Brasov',
     tel: "0730006808",
@@ -56,7 +56,7 @@ class ClinicsScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.menu),
             ),
-            title: const Text('Clinicile Unident', style: TextStyle(fontSize: 32)),
+            title: const Text('Contact', style: TextStyle(fontSize: 32)),
             backgroundColor: Color.fromRGBO(57, 52, 118, 1),
             centerTitle: true),
         backgroundColor: Colors.grey[300],

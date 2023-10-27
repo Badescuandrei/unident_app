@@ -94,19 +94,19 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 15),
-                        Text(widget.nume,
-                            style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black)), // TO-DO : get doctor name from api')
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(widget.nume,
+                              style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black)),
+                        ), // TO-DO : get doctor name from api')
                         Row(
                           // mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Icon(Icons.location_pin, color: Colors.black38, size: 20),
                             SizedBox(width: 5),
-                            Text(widget.judet ?? "Tulcea",
+                            Text(widget.judet ?? "SankyFresh",
                                 style: const TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black)) // TO-DO : get doctor location from api'
                           ],
@@ -211,7 +211,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
                 keyboardType: TextInputType.streetAddress,
                 maxLines: 2,
                 decoration: const InputDecoration(
-                    hintText: "Introducti cateva detalii despre problema dvs.",
+                    hintText: "Introduceți câteva detalii despre problema dvs.",
                     hintStyle: TextStyle(color: Colors.black54),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -272,7 +272,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
   Future<String?> sendAppointmentRequest() async {
     if (controllerDetails.text.isEmpty) {
       Flushbar(
-        message: "Adaugati cateva detalii!",
+        message: "Adăugați câteva detalii!",
         icon: Icon(
           Icons.info_outline,
           size: 28.0,
@@ -291,7 +291,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
       return null;
     } else if (selectedDate.hour == 0) {
       Flushbar(
-        message: "Selectati o ora!",
+        message: "Selectați o oră!",
         icon: Icon(
           Icons.info_outline,
           size: 28.0,
@@ -335,7 +335,7 @@ class _SolicitaProgramareDoctorScreenState extends State<SolicitaProgramareDocto
       if (res!.startsWith("13")) {
         print('e bine');
         Flushbar(
-          message: "Cerere trimisa cu succes!",
+          message: "Cerere trimisă cu succes!",
           icon: const Icon(
             Icons.info_outline,
             size: 28.0,
